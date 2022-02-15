@@ -1,0 +1,172 @@
+<!-- SELECT OPTION METHOD -->
+
+<!-- SAMPLE OF TASK -->
+
+<div class="form-group">
+
+  <label>Cust. Name</label>
+
+  <select class="form-control" name="customer">
+
+    <option value=" ">--- SELECT ---</option>
+
+    <?php
+
+    mysql_connect('localhost','root','');
+
+    mysql_select_db('tokomuh');
+
+    $result=mysql_query("SELECT * FROM tb_customer");
+
+    while($data=mysql_fetch_array($result)) {
+
+      echo "<option value='$data[cust_name]'> $data[cust_name] </option>";
+
+    }
+
+    ?>
+
+  </select>
+
+</div>
+
+<!-- END OF SAMPLE -->
+
+
+
+<!-- sample looping data -->
+
+<?php
+
+$con=mysqli_connect("localhost","root","","tokomuh");
+
+                        // Check connection
+
+if (mysqli_connect_errno())
+
+{
+
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+}
+
+
+
+$result = mysqli_query($con,"SELECT * FROM tb_product");
+
+
+
+if(mysqli_num_rows($result)>0){
+
+
+
+  while($row = mysqli_fetch_array($result))
+
+  {
+
+
+
+   echo "<div class='col col-md-4 col-xs-6'>";
+
+   echo "<div class='thumbnail'>";
+
+   echo "<span class='price'>".$row['pro_price']."</span>";
+
+   echo "<div>";
+
+   echo "<img src='".$row['pro_pict']."' alt class='img img-responsive'>";
+
+   echo "<div class='product-title'>";
+
+   echo "<h3>".$row['pro_name']."</h3>";
+
+   echo "<span class='author'>by author name</span>";
+
+   echo "</div>";
+
+   echo "</div>";
+
+   echo "</div>";
+
+   echo "</div>";
+
+ }
+
+} else {
+
+  echo "<tr>";
+
+  echo "<td colspan='7' align='center'>"."<b>"."<i>" . "No Available Record" . "</i>". "</b>" . "</td>";
+
+  echo "</tr>";
+
+} 
+
+
+
+mysqli_close($con);
+
+?>
+
+<!-- end of looping -->
+
+
+
+<!-- UPDATE RECORD -->
+
+if(isset($_POST["update"]))    
+
+{    
+
+
+
+  $oid            = $_POST['oid'];
+
+  $qname          = $_POST['qname'];
+
+
+
+  $cek = mysql_query("SELECT * FROM tb_record WHERE test_id ='$oid'");
+
+  $num = mysql_num_rows($cek);
+
+  if($num == 1){
+
+    $query = mysql_query("update tb_record set que_content='$qname' where test_id ='$oid'");
+
+    if($query){
+
+      header("Location: ./nh_admin_test.php");                                                  
+
+    } else {
+
+      echo "Updated Failed - Please contact your administrator";
+
+    }
+
+  } else {
+
+    echo "Records cannot be found!! Please contact your System Administrator" ;
+
+  }
+
+
+
+}
+
+
+
+
+
+<-- GET DATA --> 
+
+
+
+    mysql_connect('localhost', 'root','');
+
+    mysql_select_db('tr3'); 
+
+    $role = mysql_query("SELECT inex_inv_no FROM tb_invoice_export WHERE inex_kn_ref = '$ref' ");
+
+    $inv = mysql_fetch_array($role);
+

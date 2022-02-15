@@ -1,0 +1,104 @@
+/*Icon and Logo*/
+.login-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo-kn {
+	width: 100px;
+}
+
+.menu__divider {
+	background: rgb(255 255 255);
+	height: 5px;
+	width: calc(100% - 32px);
+	margin: 0px 16px;
+	box-sizing: border-box;
+}
+
+.statement-login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+}
+
+.font-logo-first {
+	color: #fff;
+	font-size: 25px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-left: 5px;
+}
+
+.font-logo-second {
+	color: #fff;
+	font-size: 25px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+/*Icon and Logo*/
+
+/*Alert*/
+.alert-danger {
+	padding: 20px;
+	background-color: #f44336;
+	color: white;
+	border-radius: 5px;
+}
+
+.closebtn {
+	margin-left: 15px;
+	color: white;
+	font-weight: bold;
+	float: right;
+	font-size: 22px;
+	line-height: 20px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.closebtn:hover {
+	color: black;
+}
+/*End Alert*/
+
+/*Sweet Alert*/
+.swal2-styled.swal2-confirm {
+	border: 0;
+	border-radius: 0.25em;
+	background: #002766;
+	background-color: #002766;
+	color: #fff;
+	font-size: 1.0625em;
+}
+/*End Sweet Alert*/
+
+/*Navbar*/
+.navbar-background {
+	background: linear-gradient(45deg, #002766, #002766);
+}
+
+.text-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 5px;
+}
+/*End Navbar*/
+
+/*For CT*/
+.clock-ct {
+	color: #fff;
+	font-size: 10px;
+	font-weight: 400;
+	font-family: Poppins, sans-serif;
+}
+
+@media (max-width: 835px){
+	.clock-ct {
+		font-size: 0px;
+	}	
+}
+/*End For CT*/
