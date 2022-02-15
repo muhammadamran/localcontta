@@ -558,7 +558,7 @@ a.bg-danger:hover {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
+  margin: 20px 0 20px;
   border-bottom: 1px solid #eee;
 }
 ul,
@@ -3093,7 +3093,7 @@ input[type="button"].btn-block {
   outline: 0;
 }
 .dropdown-menu {
-  position: absolute;
+  /*position: absolute;
   top: 100%;
   left: 0;
   z-index: 1000;
@@ -3110,6 +3110,24 @@ input[type="button"].btn-block {
   border-radius: 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;*/
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 163px;
+  padding: 5px 0;
+  margin: 0px 0 0;
+  list-style: none;
+  font-size: 14px;
+  background-color: #ffffff;
+  /* border: 1px solid #ccc; */
+  /* border: 1px solid rgba(0, 0, 0, 0.15); */
+  border-radius: -27px;
+  -webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
   background-clip: padding-box;
 }
 .dropdown-menu.pull-right {
@@ -3569,14 +3587,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eee;
+  background-color: #55b8f2;
 }
 .nav > li.disabled > a {
-  color: #999;
+  color: #55b8f2;
 }
 .nav > li.disabled > a:hover,
 .nav > li.disabled > a:focus {
-  color: #999;
+  color: #55b8f2;
   text-decoration: none;
   background-color: transparent;
   cursor: not-allowed;
@@ -3584,7 +3602,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eee;
+  background-color: #55b8f2;
   border-color: #428bca;
 }
 .nav .nav-divider {
@@ -3876,8 +3894,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar {
   display: block;
   width: 22px;
-  height: 2px;
-  border-radius: 1px;
+  height: 4px;
+  border-radius: 10px;
 }
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;

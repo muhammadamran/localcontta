@@ -19,6 +19,8 @@
     <link href="assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="assets/css/plugins/timeline/timeline.css" rel="stylesheet">
     <link href="assets/css/sb-admin.css" rel="stylesheet">
+    <!-- FA Awesome -->
+    <script src="https://kit.fontawesome.com/bd33a9775b.js" crossorigin="anonymous"></script>
 </head>
 <style type="text/css">
     .swal2-styled.swal2-confirm {

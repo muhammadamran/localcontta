@@ -86,6 +86,27 @@
 	align-items: center;
 	margin-left: 5px;
 }
+
+.role-show {
+	color: #fff;
+	font-size: 10px;
+	font-weight: 400;
+	font-family: Poppins, sans-serif;
+}
+
+@media (max-width: 423.5px) {
+	.role-show {
+		font-size: 0px;
+	}
+
+	li.dropdown.notify {
+		display: none;
+	}
+
+	li.dropdown.user {
+		margin-left: -13px;
+	}
+}
 /*End Navbar*/
 
 /*For CT*/
@@ -96,9 +117,66 @@
 	font-family: Poppins, sans-serif;
 }
 
-@media (max-width: 835px){
+@media (max-width: 988px) {
 	.clock-ct {
 		font-size: 0px;
 	}	
 }
 /*End For CT*/
+
+/*Sidebar*/
+#side-menu{
+	height: 600px;
+	overflow: auto;
+}
+
+@media (max-width: 767.5px) {
+	#side-menu{
+		height: 300px;
+		overflow: auto;
+	}
+}
+
+li.section {
+	padding: 10px;
+    background: #c6e4f5;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #002766;
+}
+
+.line__footer {
+    background: rgb(85 184 242);
+    height: 3px;
+    width: calc(100% - 32px);
+    margin: 0px 16px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.footer-sidebar {
+	margin-top: 0px;
+	/*background: linear-gradient(45deg, #55b8f2, #0e2a55);*/
+	/*color: #fff;*/
+	padding: 15px;
+}
+/*End Sidebar*/
+
+/*Color*/
+.icon-white {
+	color: #fff;
+}
+/*End Color*/
+
+/*Icon Title Page*/
+.icon-title {
+	background: linear-gradient(45deg, #55b8f2, #55b8f2);
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	box-shadow: 0 0 12px rgb(85 184 242);
+}
+/*End Icon Title Page*/

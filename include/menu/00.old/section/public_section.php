@@ -7,7 +7,6 @@
             </button>
         </span>
     </div>
-    <!-- /input-group -->
 </li>
 <li>
     <a class="active" href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
