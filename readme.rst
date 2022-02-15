@@ -8,7 +8,7 @@ App Localcontta Custom Clearance - Logistics
 
 ## 📸 Page Sign In
 <pre>
-<img src="assets/images/page/signin.JPG" width="30%">
+<img src="assets/images/page/signin.png" width="30%">
 </pre>
 
 *******************
