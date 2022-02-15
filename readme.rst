@@ -5,7 +5,6 @@ Localcontta / App Localcontta Custom Clearance - Logistics
 App Localcontta Custom Clearance - Logistics
 
 ## 📸 Page Sign In
-![](assets/images/page/signin.png)
      :alt: Page Sign In
 
 *******************
