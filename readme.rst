@@ -4,18 +4,15 @@ Localcontta / App Localcontta Custom Clearance - Logistics
 
 App Localcontta Custom Clearance - Logistics
 
-<img src="/assets/images/logo/logo.svg" width="30%">
-
 ## 📸 Page Sign In
-<pre>
-<img src="/assets/images/page/signin.png" width="30%">
-</pre>
+![](assets/images/page/signin.png)
+     :alt: Page Sign In
 
 *******************
 Release Information
 *******************
 
-This repo contains in-development code for future releases. T
+This repo contains in-development code for future releases.
 
 **************************
 Changelog and New Features
