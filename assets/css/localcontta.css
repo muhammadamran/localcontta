@@ -139,22 +139,22 @@
 
 li.section {
 	padding: 10px;
-    background: #c6e4f5;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    font-size: 10px;
-    font-weight: 700;
-    color: #002766;
+	background: #c6e4f5;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 700;
+	color: #002766;
 }
 
 .line__footer {
-    background: rgb(85 184 242);
-    height: 3px;
-    width: calc(100% - 32px);
-    margin: 0px 16px;
-    box-sizing: border-box;
-    margin-top: 20px;
+	background: rgb(85 184 242);
+	height: 3px;
+	width: calc(100% - 32px);
+	margin: 0px 16px;
+	box-sizing: border-box;
+	margin-top: 20px;
 }
 
 .footer-sidebar {
@@ -180,3 +180,47 @@ li.section {
 	box-shadow: 0 0 12px rgb(85 184 242);
 }
 /*End Icon Title Page*/
+
+/*Table*/
+.table-responsive {
+	overflow: auto;
+}
+/*End Table*/
+
+/*Tooltip*/
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+/*End Tooltip*/

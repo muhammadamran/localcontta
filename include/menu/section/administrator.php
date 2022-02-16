@@ -4,7 +4,7 @@
     </div>
 </li>
 <li>
-    <a href="#"><i class="fa fa-wrench fa-fw"></i> Administration<span class="fa arrow"></span></a>
+    <a href="#"><i class="fa fa-atlas fa-fw"></i> Administration<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a href="iou_adm_user.php">UserList</a>

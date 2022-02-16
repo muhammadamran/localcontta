@@ -4,7 +4,7 @@
     </div>
 </li>
 <li>
-    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Export<span class="fa arrow"></span></a>
+    <a href="#"><i class="fa fa-box fa-fw"></i> Export<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a href="#" style="background-color: skyblue;color: white"><i class="fa fa-files-o fa-fw"></i> <b>Airfreight</b><span class="fa arrow"></span></a>
@@ -81,7 +81,7 @@
     </ul>
 </li>
 <li>
-    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Import<span class="fa arrow"></span></a>
+    <a href="#"><i class="fa fa-dolly-flatbed fa-fw"></i> Import<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a href="#" style="background-color: skyblue;color: white"><i class="fa fa-files-o fa-fw"></i> <b>Airfreight</b><span class="fa arrow"></span></a>
@@ -259,7 +259,7 @@
     </ul>
 </li>
 <li>
-    <a href="#"><i class="fa fa-truck fa-fw"></i> Trucker<span class="fa arrow"></span></a>
+    <a href="#"><i class="fa fa-truck-moving fa-fw"></i> Trucker<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a class="#" href="truck_confirm_job.php?ref=0000000.php"><i class="#"></i>Confirm Job</a>

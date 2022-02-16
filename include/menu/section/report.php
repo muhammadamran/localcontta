@@ -4,7 +4,7 @@
     </div>
 </li>
 <li>
-    <a href="#"><i class="fa fa-table fa-fw"></i> Report<span class="fa arrow"></span></a>
+    <a href="#"><i class="fa fa-folder-open fa-fw"></i> Report<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">                           
         <li>
             <a href="#"> Daily Report<span class="fa arrow"></span></a>
