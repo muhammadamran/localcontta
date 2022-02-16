@@ -21,16 +21,39 @@
     <link href="assets/css/sb-admin.css" rel="stylesheet">
     <!-- FA Awesome -->
     <script src="https://kit.fontawesome.com/bd33a9775b.js" crossorigin="anonymous"></script>
+    <!-- Alert -->
+    <script src="assets/sweet/sweetalert2.all.js"></script>
+    <script src="assets/sweet/sweetalert2.all.min.js"></script>
+    <script src="assets/sweet/sweetalert2.js"></script>
+    <script src="assets/sweet/sweetalert2.min.js"></script>
 </head>
 <style type="text/css">
+    /*Sweet Alert*/
+    .swal2-popup {
+        display: none;
+        position: relative;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center;
+        width: 32em;
+        max-width: 100%;
+        padding: 1.25em;
+        border: none;
+        border-radius: 5px;
+        background: #fff;
+        font-family: inherit;
+        font-size: 1.6rem;
+    }
+    
     .swal2-styled.swal2-confirm {
         border: 0;
         border-radius: 0.25em;
-        background: #002766;
+        background: initial;
         background-color: #002766;
         color: #fff;
         font-size: 1.0625em;
     }
+    /*End Sweet Alert*/
 
     body {
         font-family: "Poppins",sans-serif;

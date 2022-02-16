@@ -12,14 +12,14 @@ if (isset($_POST['submit'])) {
     $log_type = "login";
     $date_log = date('Y-m-d H:i:m');
 
-    $q = mysql_query("SELECT * from tb_user where user_name='$user' and user_pass ='$pass'");
+    $q = mysql_query("SELECT * FROM tb_user WHERE user_name='$user' AND user_pass ='$pass'");
 
     if (mysql_num_rows($q) == 1) {
         session_start();
         $_SESSION['username']=$user;
-        $query = mysql_query("INSERT into tb_log values(' ','$user','$log_type','$date_log',' ')");
+        $query = mysql_query("INSERT INTO tb_log VALUES(' ','$user','$log_type','$date_log',' ')");
         if ($query) {
-            header("Location: ./index.php");
+            header("Location: ./index.php?SignInsuccess=true");
         } else {
             echo "<h4>". "log error".mysql_error()."</h4>";
         }           
@@ -132,6 +132,7 @@ if (isset($_POST['submit'])) {
     <script type="text/javascript">
         if (window?.location?.href?.indexOf('error') > -1) {
             Swal.fire({
+                title: 'Sign In Failed!',
                 icon: 'error',
                 text: 'Wrong username or password. Try again or contact JKT CI Team!',
             })

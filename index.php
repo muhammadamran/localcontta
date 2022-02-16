@@ -274,7 +274,10 @@ include 'include/head.php';
             </div>
         </div>
     </div>
-    <?php include 'include/jquery.php'; ?>
+    <?php 
+    include 'include/jquery.php';
+    include 'include/alert.php';
+    ?>
     <!-- End Main Page -->
 </body>
 </html>
