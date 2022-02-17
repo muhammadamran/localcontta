@@ -47,6 +47,39 @@ if(isset($_POST["create"]))
             <i class="fa fa-table"></i> Management Users
           </div>
           <div class="panel-body">
+            <div class="page-add">
+              <!-- Add Users -->
+              <!-- Trigger the modal with a button -->
+              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add-users">
+                <i class="fa fa-user-plus"></i> Add Users
+              </button>
+              <!-- Modal content-->
+              <div class="modal fade" id="add-users" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times-circle;</button>
+                      <h4 class="modal-title"><b>[Add Users] </b> Management User</h4>
+                    </div>
+                    <form method="post" action=" ">
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label>User Role</label>
+                          <select class="form-control">
+                              <option value="">-- Select User Role --</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Add Users -->
+            </div>
             <div class="table-responsive">
               <table class="display hover" id="users">
                 <thead>
@@ -77,17 +110,17 @@ if(isset($_POST["create"]))
                       echo "<td style='text-align: center;'>" . $row['user_role'] . "</td>";
                       echo "<td style='text-align: center;'>
                       <a href='#' data-toggle='modal' data-target='#edit$row[user_id]' title='Edit'>
-                      <span class='btn btn-sm btn-primary'>
+                      <span class='btn btn-sm btn-warning'>
                       <i class='fa fa-pencil'></i>
                       </span>
                       </a>
                       <a href='#' data-toggle='modal' data-target='#pass$row[user_id]' title='Change Password'>
-                      <span class='btn btn-sm btn-primary'>
+                      <span class='btn btn-sm btn-change'>
                       <i class='fa fa-unlock'></i>
                       </span>
                       </a>
                       <a href='#' data-toggle='modal' data-target='#delete$row[user_id]' title='Delete'>
-                      <span class='btn btn-sm btn-primary'>
+                      <span class='btn btn-sm btn-danger'>
                       <i class='fa fa-trash'></i>
                       </span>
                       </a>
