@@ -110,19 +110,27 @@ $access = mysql_fetch_array($role);
                 </li>
             </ul>
         </li>
-    </ul>  
+    </ul>
+    <!-- For Active Sidebar -->
+    <?php $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)); ?>
+    <!-- End For Active Sidebar -->
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
+                <!-- <li class="sidebar-search">
                     <div class="input-group custom-search-form">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
-                            <button class="btn-s btn-default" type="button">
+                            <button class="btn btn-default" type="button">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
                     </div>
+                </li> -->
+                <li style="background: #002766">
+                    <a href="http://kn-idcore.ap.win.int.kn/" target="_blank"><i class="fa fa-globe fa-fw" style="color: #fff;"></i> 
+                        <font style="color: #fff;font-weight: 700;">KN-IDCORE</font>
+                    </a>
                 </li>
                 <li class="section">
                     <div>
@@ -130,10 +138,10 @@ $access = mysql_fetch_array($role);
                     </div>
                 </li>
                 <li>
-                    <a class="active" href="index.php"><i class="fa fa-chart-pie fa-fw"></i> Dashboard</a>
+                    <a class="<?= $uriSegments[2] == 'index.php' ? 'active' : '' ?>" href="index.php"><i class="fa fa-chart-pie fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a class="#" href="search.php"><i class="fa fa-search fa-fw"></i> Search</a>
+                    <a class="<?= $uriSegments[2] == 'search.php' ? 'active' : '' ?>" href="search.php"><i class="fa fa-search fa-fw"></i> Search</a>
                 </li>
                 <?php
                 /* START SHOW MENU LIST OPTION */

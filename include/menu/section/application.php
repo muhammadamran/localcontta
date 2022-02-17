@@ -3,8 +3,8 @@
         APPLICATION SECTION
     </div>
 </li>
-<li>
-    <a href="#"><i class="fa fa-box fa-fw"></i> Export<span class="fa arrow"></span></a>
+<li class="<?= $uriSegments[2] == 'air_export_master.php' ? 'active' : '' ?>">
+    <a class="<?= $uriSegments[2] == 'air_export_master.php' ? 'active' : '' ?>" href="#"><i class="fa fa-box fa-fw"></i> Export<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a href="#" style="background-color: skyblue;color: white"><i class="fa fa-files-o fa-fw"></i> <b>Airfreight</b><span class="fa arrow"></span></a>
@@ -80,8 +80,8 @@
         </li>
     </ul>
 </li>
-<li>
-    <a href="#"><i class="fa fa-dolly-flatbed fa-fw"></i> Import<span class="fa arrow"></span></a>
+<li class="<?= $uriSegments[2] == 'air_import_master.php' || $uriSegments[2] == 'air_imp_pre.php' || $uriSegments[2] == 'air_imp_clear.php' || $uriSegments[2] == 'air_imp_post.php' || $uriSegments[2] == 'import_set_trucking.php' || $uriSegments[2] == 'imp_efile.php' ? 'active' : '' ?>">
+    <a class="<?= $uriSegments[2] == 'air_import_master.php' || $uriSegments[2] == 'air_imp_pre.php' || $uriSegments[2] == 'air_imp_clear.php' || $uriSegments[2] == 'air_imp_post.php' || $uriSegments[2] == 'import_set_trucking.php' || $uriSegments[2] == 'imp_efile.php' ? 'active' : '' ?>" href="#"><i class="fa fa-dolly-flatbed fa-fw"></i> Import<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a href="#" style="background-color: skyblue;color: white"><i class="fa fa-files-o fa-fw"></i> <b>Airfreight</b><span class="fa arrow"></span></a>

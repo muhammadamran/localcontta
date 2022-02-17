@@ -2167,7 +2167,7 @@ th {
     .btn-primary {
       color: #fff;
       background-color: #002765;
-      border-color: #55b8f2;
+      border-color: #002765;
     }
     .btn-primary:hover,
     .btn-primary:focus,
@@ -4061,7 +4061,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default {
   background-color: #f8f8f8;
-  border-color: #e7e7e7;
+  border-color: #55b8f2;
 }
 .navbar-default .navbar-brand {
   color: #777;
@@ -5251,9 +5251,11 @@ th:last-child {
   border-color: #ddd;
 }
 .panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  color: #002766;
+  background-color: #c6e4f5;
+  border-color: #c6e4f5;
+  font-size: 14px;
+  font-weight: 700;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #ddd;

@@ -18,3 +18,5 @@
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="assets/js/sb-admin-2.js"></script>
+</body>
+</html>

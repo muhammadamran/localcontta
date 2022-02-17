@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +35,9 @@
     <script src="assets/sweet/sweetalert2.all.min.js"></script>
     <script src="assets/sweet/sweetalert2.js"></script>
     <script src="assets/sweet/sweetalert2.min.js"></script>
+    <!-- Datatables -->
+    <link href="assets/js/dataTables/tables.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
 </head>
 <style type="text/css">
     /*Sweet Alert*/
@@ -65,48 +70,6 @@
     body {
         font-family: "Poppins",sans-serif;
     }
-
-    .btn-s {
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: 400;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid #c9c9c9;
-        white-space: nowrap;
-        padding: 9px 12px;
-        font-size: 14px;
-        line-height: 1.428571429;
-        border-radius: 0 4px 4px 0;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-    }
-
-    .btn {
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: 400;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-        white-space: nowrap;
-        padding: 9px 12px;
-        font-size: 14px;
-        line-height: 1.428571429;
-        border-radius: 4px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-    }
 </style>
 <script type="text/javascript"> 
     function display_c(){
@@ -120,4 +83,5 @@
         document.getElementById('ct').innerHTML = x;
         tt=display_c();
     }
-</script>
+</script>.
+<body onload="display_ct()">
