@@ -1,27 +1,37 @@
 <?php
-
 include "include/connection.php";
 include "include/restrict.php";
 include "include/datatables.php";
 
 if(isset($_POST["create"]))    
 {    
+  // Admin
+  $cekRole =  $_POST['user_role'];
+  if ($cekRole == 'admin') {
+    $username             = $_POST['admin_user_name'];
+    $password             = 'changeme';
+    $email                = $_POST['admin_user_mail'];
+    $role                 = $_POST['user_role'];
+    $scope                = $_POST['admin_scope'];
+    $department           = $_POST['admin_dept'];
 
-  $user_name            = $_POST['user_name'];
-  $user_pass            = $_POST['user_pass'];
-  $email                = $_POST['email'];
-  $role                 = $_POST['role'];
+    $query = mysql_query("INSERT INTO tb_user
+                          (user_id,user_name,user_pass,user_mail,user_role,user_scope,user_dept)
+                          VALUES
+                          ('','$username','$password','$email','$role','$scope','$department')");
 
-  $query = mysql_query("INSERT into tb_user values(' ','$user_name','$user_pass','$email','$role')");
-
-  if($query){
-    header("Location: ./iou_adm_user.php");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
+    if($query) {
+      header("Location: ./iou_adm_user.php?InputSuccess=true");                                                  
+    } else {
+      // echo "Updated Failed - Please contact your administrator".mysql_error();
+      header("Location: ./iou_adm_user.php?InputFailed=true");                                                  
+    }
   }
+  // General Manager
+  // Manager
+  // User
+  // Guest
 }
-
-
 ?>
 <?php include 'include/head.php';?>
 <div id="wrapper">
@@ -58,21 +68,182 @@ if(isset($_POST["create"]))
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times-circle;</button>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4 class="modal-title"><b>[Add Users] </b> Management User</h4>
                     </div>
-                    <form method="post" action=" ">
+                    <form method="post" action="">
                       <div class="modal-body">
-                        <div class="form-group">
-                          <label>User Role</label>
-                          <select class="form-control">
-                              <option value="">-- Select User Role --</option>
-                          </select>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>User Role</label>
+                              <select class="form-control" name="user_role" id="input-role" required>
+                                <option id="option_empty" value="">-- Select User Role --</option>
+                                <option id="option_admin" value="admin">Administrator</option>
+                                <option id="option_gm" value="gm">General Manager</option>
+                                <option id="option_manager" value="manager">Manager</option>
+                                <option id="option_user" value="user">User</option>
+                                <option id="option_guest" value="guest">Guest</option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
+                        <!-- Admin Scope and Department -->
+                        <div class="row" id="admin_input" style="display:none;">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Scope</label>
+                              <input type="text" class="form-control" name="admin_scope" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Department</label>
+                              <input type="text" class="form-control" name="admin_dept" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Username <font style="color: red;">*</font></label>
+                                <input type="text" class="form-control" name="admin_user_name" placeholder="Input username...">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Email <font style="color: red;">*</font></label>
+                                <input type="email" class="form-control" name="admin_user_mail" placeholder="Input email...">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Admin Scope and Department -->
+                        <!-- GM Scope and Department -->
+                        <div class="row" id="gm_input" style="display:none;">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Scope</label>
+                              <input type="text" class="form-control" name="gm_scope" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Department</label>
+                              <input type="text" class="form-control" name="gm_dept" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Username <font style="color: red;">*</font></label>
+                                <input type="text" class="form-control" name="gm_user_name" placeholder="Input username...">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Email <font style="color: red;">*</font></label>
+                                <input type="email" class="form-control" name="gm_user_mail" placeholder="Input email...">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End GM Scope and Department -->
+                        <!-- Guest Scope and Department -->
+                        <div class="row" id="guest_input" style="display:none;">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Scope</label>
+                              <input type="text" class="form-control" name="guest_scope" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Department</label>
+                              <input type="text" class="form-control" name="guest_dept" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Username <font style="color: red;">*</font></label>
+                                <input type="text" class="form-control" name="guest_user_name" placeholder="Input username...">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Email <font style="color: red;">*</font></label>
+                                <input type="email" class="form-control" name="guest_user_mail" placeholder="Input email...">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Guest Scope and Department -->
+                        <!-- Manager Scope and Department -->
+                        <div class="row" id="manager_input" style="display:none;">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Scope</label>
+                              <input type="text" class="form-control" name="manager_scope" value="all" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Department <font style="color: red;">*</font></label>
+                              <select class="form-control" id="id_manager_dept" name="manager_dept">
+                                <option value="">-- Select User Role --</option>
+                                <option value="sea">Sea Freight</option>
+                                <option value="air">Air Freight</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Username <font style="color: red;">*</font></label>
+                                <input type="text" class="form-control" name="manager_user_name" placeholder="Input username...">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Email <font style="color: red;">*</font></label>
+                                <input type="email" class="form-control" name="manager_user_mail" placeholder="Input email...">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Manager Scope and Department -->
+                        <!-- User Scope and Department -->
+                        <div class="row" id="user_input" style="display:none;">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Scope <font style="color: red;">*</font></label>
+                              <select class="form-control" id="id_user_scope" name="user_scope">
+                                <option value="">-- Select Scope --</option>
+                                <option value="import">Import</option>
+                                <option value="export">Export</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Department <font style="color: red;">*</font></label>
+                              <select class="form-control" id="id_user_dept" name="user_dept">
+                                <option value="">-- Select Department --</option>
+                                <option value="sea">Sea Freight</option>
+                                <option value="air">Air Freight</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Username <font style="color: red;">*</font></label>
+                                <input type="text" class="form-control" name="user_user_name" placeholder="Input username...">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Email <font style="color: red;">*</font></label>
+                                <input type="email" class="form-control" name="user_user_mail" placeholder="Input email...">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End User Scope and Department -->
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                        <button type="submit" name="create" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-times-circle"></i> Close</button>
                       </div>
                     </form>
                   </div>
@@ -257,4 +428,98 @@ if(isset($_POST["create"]))
 include 'include/jquery.php';
 include 'include/alert.php';
 ?>
+<script type="text/javascript">
+  $(function() {
+    $("#input-role").change(function() {
+      if ($(this).val() == "admin") {
+        $("#admin_input").show();
+        $("#gm_input").hide();
+        $("#guest_input").hide();
+        $("#manager_input").hide();
+        $("#user_input").hide();
+      } else if ($(this).val() == "gm") {
+        $("#gm_input").show();
+        $("#admin_input").hide();
+        $("#guest_input").hide();
+        $("#manager_input").hide();
+        $("#user_input").hide();
+      } else if ($(this).val() == "guest") {
+        $("#guest_input").show();
+        $("#admin_input").hide();
+        $("#gm_input").hide();
+        $("#manager_input").hide();
+        $("#user_input").hide();
+      } else if ($(this).val() == "manager") {
+        $("#manager_input").show();
+        $("#admin_input").hide();
+        $("#gm_input").hide();
+        $("#guest_input").hide();
+        $("#user_input").hide();
+        Swal.fire({
+          icon: 'info',
+          title: 'Information!',
+          imageWidth: 400,
+          imageHeight: 250,
+          imageAlt: 'Custom image',
+          html: '<font style="font-size: 12px;font-weight: 300;">Make sure the mandarory input is not empty. <br><b>Pay attention to the input label <font style="color: red">*</font></b></font>',
+          showCloseButton: false,
+          showCancelButton: false,
+          focusConfirm: false,
+          confirmButtonText: 'OK'
+        })
+      } else if ($(this).val() == "user") {
+        $("#user_input").show();
+        $("#admin_input").hide();
+        $("#gm_input").hide();
+        $("#guest_input").hide();
+        $("#manager_input").hide();  
+        Swal.fire({
+          icon: 'info',
+          title: 'Information!',
+          imageWidth: 400,
+          imageHeight: 250,
+          imageAlt: 'Custom image',
+          html: '<font style="font-size: 12px;font-weight: 300;">Make sure the mandarory input is not empty. <br><b>Pay attention to the input label <font style="color: red">*</font></b></font>',
+          showCloseButton: false,
+          showCancelButton: false,
+          focusConfirm: false,
+          confirmButtonText: 'OK'
+        })    
+      } else {
+        $("#admin_input").hide();
+        $("#gm_input").hide();
+        $("#guest_input").hide();
+        $("#manager_input").hide();
+        $("#user_input").hide();
+      }
+    });
+  });
+
+  function validasi() {
+    var v_option_manager = document.getElementById("option_manager").value;
+    // Manager
+    var input_manager_dept = document.getElementById("id_manager_dept").value;
+    // User
+    var input_user_scope = document.getElementById("id_user_scope").value;
+    var input_user_dept = document.getElementById("id_user_dept").value;
+
+    if (v_option_manager == "manager" && input_manager_dept != "") {
+        return true;
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Information!',
+        imageWidth: 400,
+        imageHeight: 250,
+        imageAlt: 'Custom image',
+        html: '<font style="font-size: 12px;font-weight: 300;">Make sure the mandarory input is not empty. <br><b>Pay attention to the input label <font style="color: red">*</font></b></font>',
+        showCloseButton: false,
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText: 'OK'
+      })
+      return false;
+    }
+  }
+  </script>
 
