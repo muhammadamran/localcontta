@@ -105,11 +105,6 @@ if(isset($_POST["create"]))
     }
   }
 }
-// EDIT
-if(isset($_POST["edit"]))
-{
-
-}
 // DELETE
 if(isset($_POST["delete"]))    
 {
@@ -399,7 +394,7 @@ if(isset($_POST["change_pass"]))
               </div>
               <!-- End Add Users -->
             </div>
-             <form action="iou_adm_user.php" method="post">
+            <form action="iou_adm_user.php" method="post">
               <div style="margin-bottom: 15px;">
                 <input id="submit" name="submit" type="submit" class="btn btn-sm btn-danger" value="Delete Selected" />
               </div>
@@ -481,7 +476,7 @@ if(isset($_POST["change_pass"]))
                                 </td>";
                         }
                         echo "<td style='text-align: center;'>
-                        <a href='#' data-toggle='".$modal_btn."' data-target='#edit$row[user_id]' title='Edit'>
+                        <a href='iou_adm_user_edit.php?user_id=$row[user_id]' target='_blank' title='Edit'>
                         <span class='btn btn-sm btn-warning' $show_btn>
                         <i class='fa fa-pencil'></i>
                         </span>
@@ -499,193 +494,6 @@ if(isset($_POST["change_pass"]))
                         </td>";
                         echo "</tr>";
                         ?>
-                        <!-- Edit -->
-                        <div class="modal fade" id="edit<?=$row['user_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[Edit Users]</b> Management Users</h4>
-                              </div>
-                              <form method="post" action=" ">
-                                <div class="modal-body">
-                                  <!-- Read Only Edut -->
-                                  <div class="row">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>User Name</label>
-                                        <input type="text" name="username" class="form-control" value="<?=$row['user_name'];?>" readonly>
-                                        <input type="hidden" name="uid" value="<?=$row['user_id'];?>">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Current Role</label>
-                                        <input type="text" name="cur_role" class="form-control" value="<?=$row['user_role'];?>"  readonly>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End Read Only Edit -->
-                                  <div class="row">
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Choose New Role</label>                                  
-                                        <div class="form-group">
-                                          <select class="form-control" name="user_role_edit" id="input-role-edit" required>
-                                            <option id="option_empty" value="">-- Select New User Role --</option>
-                                            <option id="option_admin" value="admin">Administrator</option>
-                                            <option id="option_gm" value="gm">General Manager</option>
-                                            <option id="option_manager" value="manager">Manager</option>
-                                            <option id="option_user" value="user">User</option>
-                                            <option id="option_guest" value="guest">Guest</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- Admin Scope and Department -->
-                                  <div class="row" id="admin_input_edit" style="display:none;">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Scope</label>
-                                        <input type="text" class="form-control" name="admin_scope_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Department</label>
-                                        <input type="text" class="form-control" name="admin_dept_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Email</label>
-                                          <input type="email" class="form-control" name="admin_user_mail_edit" placeholder="Input email..." value="<?= $row['user_mail'] ?>">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End Admin Scope and Department -->
-                                  <!-- GM Scope and Department -->
-                                  <div class="row" id="gm_input_edit" style="display:none;">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Scope</label>
-                                        <input type="text" class="form-control" name="gm_scope_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Department</label>
-                                        <input type="text" class="form-control" name="gm_dept_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Email</label>
-                                          <input type="email" class="form-control" name="gm_user_mail_edit" placeholder="Input email..." value="<?= $row['user_mail'] ?>">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End GM Scope and Department -->
-                                  <!-- Guest Scope and Department -->
-                                  <div class="row" id="guest_input_edit" style="display:none;">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Scope</label>
-                                        <input type="text" class="form-control" name="guest_scope_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Department</label>
-                                        <input type="text" class="form-control" name="guest_dept_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Email</label>
-                                          <input type="email" class="form-control" name="guest_user_mail_edit" placeholder="Input email..." value="<?= $row['user_mail'] ?>">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End Guest Scope and Department -->
-                                  <!-- Manager Scope and Department -->
-                                  <div class="row" id="manager_input_edit" style="display:none;">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Scope</label>
-                                        <input type="text" class="form-control" name="manager_scope_edit" value="all" readonly>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Department</label>
-                                        <select class="form-control" id="id_manager_dept_edit" name="manager_dept">
-                                          <?php if ($row['user_dept'] ='sea') { ?>
-                                          <option value="<?= $row['user_dept'] ?>">Sea Freight</option>
-                                          <?php } else if ($row['user_dept'] ='air') { ?>
-                                          <option value="<?= $row['user_dept'] ?>">Air Freight</option>
-                                          <?php } ?>
-                                          <option value="">-- Select User Role --</option>
-                                          <option value="sea">Sea Freight</option>
-                                          <option value="air">Air Freight</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Email</label>
-                                          <input type="email" class="form-control" name="manager_user_mail_edit" placeholder="Input email..." value="<?= $row['user_mail'] ?>">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End Manager Scope and Department -->
-                                  <!-- User Scope and Department -->
-                                  <div class="row" id="user_input_edit" style="display:none;">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Scope</label>
-                                        <select class="form-control" id="id_user_scope" name="user_scope_edit">
-                                          <option value="<?= $row['user_scope'] ?>"><?= $row['user_scope'] ?></option>
-                                          <option value="">-- Select Scope --</option>
-                                          <option value="import">Import</option>
-                                          <option value="export">Export</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Department</label>
-                                        <select class="form-control" id="id_user_dept" name="user_dept_edit">
-                                          <?php if ($row['user_dept'] ='sea') { ?>
-                                          <option value="<?= $row['user_dept'] ?>">Sea Freight</option>
-                                          <?php } else if ($row['user_dept'] ='air') { ?>
-                                          <option value="<?= $row['user_dept'] ?>">Air Freight</option>
-                                          <?php } ?>
-                                          <option value="">-- Select Department --</option>
-                                          <option value="sea">Sea Freight</option>
-                                          <option value="air">Air Freight</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Email</label>
-                                          <input type="email" class="form-control" name="user_user_mail_edit" placeholder="Input email..." value="<?= $row['user_mail'] ?>">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End User Scope and Department -->
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="submit" name="edit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                  <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="far fa-times-circle"></i> Close</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End Edit -->
                         <!-- Change Password -->
                         <div class="modal fade" id="pass<?=$row['user_id'];?>" role="dialog">
                           <div class="modal-dialog">

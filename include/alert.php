@@ -12,6 +12,7 @@
 
 <!-- Managemen Users -->
 <script type="text/javascript">
+    // Input - Add
     if (window?.location?.href?.indexOf('InputSuccess') > -1) {
         Swal.fire({
             title: 'Success Alert!',
@@ -29,7 +30,29 @@
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
+    // End Input - Add
 
+    // Update Data
+    if (window?.location?.href?.indexOf('UpdateSuccess') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data updated successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('UpdateFailed') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data failed to updated!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+    // End Update Data
+
+    // Delete
     if (window?.location?.href?.indexOf('DeleteSuccess') > -1) {
         Swal.fire({
             title: 'Delete Alert!',
@@ -47,7 +70,9 @@
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
+    // End Delete
 
+    // Change Password
     if (window?.location?.href?.indexOf('UpdatePassSuccess') > -1) {
         Swal.fire({
             title: 'Update Alert!',
@@ -65,6 +90,7 @@
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
+    // End Change Password
 </script>
 
 <!-- Swal.fire({
