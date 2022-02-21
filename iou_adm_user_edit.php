@@ -17,21 +17,21 @@ $row = mysqli_fetch_array($result);
 if(isset($_POST["edit"]))    
 {    
   // Admin
-  $cekRole =  $_POST['user_role'];
+  $cekRole =  $_POST['user_role_edit'];
   if ($cekRole == 'admin') {
     $email                = $_POST['admin_user_mail'];
     $role                 = $_POST['user_role_edit'];
     $scope                = $_POST['admin_scope_edit'];
     $department           = $_POST['admin_dept_edit'];
 
-    $query = mysql_query("INSERT INTO tb_user
-                          (user_id,user_name,user_pass,user_mail,user_role,user_scope,user_dept)
-                          VALUES
-                          ('','$username','$password','$email','$role','$scope','$department')");
+    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
+    										 user_role='$role',
+    										 user_scope='$scope',
+    										 user_dept='$department'
+    										 WHERE user_id='$uid'");
     if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                         
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
     }
   // General Manager
@@ -41,14 +41,14 @@ if(isset($_POST["edit"]))
     $scope                = $_POST['gm_scope_edit'];
     $department           = $_POST['gm_dept_edit'];
 
-    $query = mysql_query("INSERT INTO tb_user
-                          (user_id,user_name,user_pass,user_mail,user_role,user_scope,user_dept)
-                          VALUES
-                          ('','$username','$password','$email','$role','$scope','$department')");
+    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
+    										 user_role='$role',
+    										 user_scope='$scope',
+    										 user_dept='$department'
+    										 WHERE user_id='$uid'");
     if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
     }
   // Manager
@@ -58,14 +58,14 @@ if(isset($_POST["edit"]))
     $scope                = $_POST['manager_scope_edit'];
     $department           = $_POST['manager_dept_edit'];
 
-    $query = mysql_query("INSERT INTO tb_user
-                          (user_id,user_name,user_pass,user_mail,user_role,user_scope,user_dept)
-                          VALUES
-                          ('','$username','$password','$email','$role','$scope','$department')");
+    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
+    										 user_role='$role',
+    										 user_scope='$scope',
+    										 user_dept='$department'
+    										 WHERE user_id='$uid'");
     if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                            
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
     }
   // User
@@ -75,33 +75,31 @@ if(isset($_POST["edit"]))
     $scope                = $_POST['user_scope_edit'];
     $department           = $_POST['user_dept_edit'];
 
-    $query = mysql_query("INSERT INTO tb_user
-                          (user_id,user_name,user_pass,user_mail,user_role,user_scope,user_dept)
-                          VALUES
-                          ('','$username','$password','$email','$role','$scope','$department')");
+    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
+    										 user_role='$role',
+    										 user_scope='$scope',
+    										 user_dept='$department'
+    										 WHERE user_id='$uid'");
     if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                      
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
     }
   // Guest
   } else if ($cekRole == 'guest') {
-    $username             = $_POST['guest_user_name'];
-    $password             = 'changeme';
-    $email                = $_POST['guest_user_mail'];
+    $email                = $_POST['guest_user_mail_edit'];
     $role                 = $_POST['user_role_edit'];
-    $scope                = $_POST['guest_scope'];
-    $department           = $_POST['guest_dept'];
+    $scope                = $_POST['guest_scope_edit'];
+    $department           = $_POST['guest_dept_edit'];
 
-    $query = mysql_query("INSERT INTO tb_user
-                          (user_id,user_name,user_pass,user_mail,user_role,user_scope,user_dept)
-                          VALUES
-                          ('','$username','$password','$email','$role','$scope','$department')");
+    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
+    										 user_role='$role',
+    										 user_scope='$scope',
+    										 user_dept='$department'
+    										 WHERE user_id='$uid'");
     if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                              
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
     }
   }
