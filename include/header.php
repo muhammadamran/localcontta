@@ -146,35 +146,35 @@ $access = mysql_fetch_array($role);
                 <?php
                 /* START SHOW MENU LIST OPTION */
                 // IT Departement
-                if ($access['user_role'] == 'admin') 
+                if ($access['user_role'] == 'admin' && $access['user_scope'] == 'all' && $access['user_dept'] == 'all') 
                 { 
                     include 'menu/admin/sidebar.php';
                 } 
 
                 /*General Manager*/
-                else if ($access['user_role'] == 'gm') 
+                else if ($access['user_role'] == 'gm' && $access['user_scope'] == 'all' && $access['user_dept'] == 'all') 
                 { 
                     include 'menu/gm/sidebar.php';
                 } 
 
                 /*Manager SEA*/
-                else if ($access['user_role'] == 'manager') 
+                else if ($access['user_role'] == 'manager' && $access['user_scope'] == 'all' && $access['user_dept'] == 'sea') 
                 { 
                     include 'menu/manager/sea/sidebar.php';
                 }
                 /*Manager AIR*/
-                else if ($access['user_role'] == 'manager') 
+                else if ($access['user_role'] == 'manager' && $access['user_scope'] == 'all' && $access['user_dept'] == 'air') 
                 { 
                     include 'menu/manager/air/sidebar.php';
                 } 
 
                 /*User Import and Export SEA*/
-                else if ($access['user_role'] == 'user' AND $access['user_dept'] == 'sea') 
+                else if ($access['user_role'] == 'user' && $access['user_dept'] == 'sea') 
                 { 
                     include 'menu/user/sea/sidebar.php';
                 } 
                 /*User Import and Export AIR*/
-                else if ($access['user_role'] == 'user' AND $access['user_dept'] == 'air') 
+                else if ($access['user_role'] == 'user' && $access['user_dept'] == 'air') 
                 { 
                     include 'menu/user/sea/sidebar.php';
                 } 
@@ -187,4 +187,12 @@ $access = mysql_fetch_array($role);
                     include 'menu/guest/sidebar.php';
                 } 
                 /* END SHOW MENU LIST OPTION */
+                else
+                { 
                 ?>
+                <script type="text/javascript">
+                    setInterval( () => {
+                       window.location.href = 'http://127.0.0.1:8081/localcontta/login.php?errorAccess=true';
+                    }, 0);
+                </script>
+                <?php } ?>

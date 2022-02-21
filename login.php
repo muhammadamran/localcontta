@@ -140,6 +140,15 @@ if (isset($_POST['submit'])) {
             })
             history.replaceState({}, '', './login.php');
         }
+
+        if (window?.location?.href?.indexOf('errorAccess') > -1) {
+            Swal.fire({
+                title: 'Access Failed!',
+                icon: 'error',
+                text: 'Please contact your administrator!',
+            })
+            history.replaceState({}, '', './login.php');
+        }
     </script>
     <!-- End Show Password -->
     <div id="dropDownSelect1"></div>
