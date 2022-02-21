@@ -29,6 +29,42 @@
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
+
+    if (window?.location?.href?.indexOf('DeleteSuccess') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data delete successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('DeleteFailed') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data failed to delete!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('UpdatePassSuccess') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data updated successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('UpdatePassFailed') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data failed to updated!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
 </script>
 
 <!-- Swal.fire({

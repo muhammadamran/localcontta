@@ -1,4 +1,4 @@
-/*Icon and Logo*/
+Icon and Logo*/
 .login-logo {
 	display: flex;
 	justify-content: center;
@@ -77,7 +77,8 @@
 
 /*Navbar*/
 .navbar-background {
-	background: linear-gradient(45deg, #002766, #002766);
+	/*background: linear-gradient(45deg, #002766, #002766);*/
+	background: linear-gradient(45deg, #26c5e6, #26c5e6);
 }
 
 .text-logo {
@@ -177,11 +178,11 @@ li.show {
 
 /*Icon Title Page*/
 .icon-title {
-	background: linear-gradient(45deg, #55b8f2, #55b8f2);
-	padding: 10px;
-	border-radius: 5px;
-	color: #fff;
-	box-shadow: 0 0 12px rgb(85 184 242);
+	background: linear-gradient(45deg, #26c5e6, #26c5e6);
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0 12px rgb(38 197 230);
 }
 /*End Icon Title Page*/
 
@@ -234,3 +235,13 @@ li.show {
     margin-bottom: 15px;
 }
 /*End Page Add Up Table*/
+
+/*Icon Show Password*/
+.field-icon {
+	float: right;
+    margin-right: 15px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}
+/*End Icon Show Password

@@ -21,7 +21,7 @@ $access = mysql_fetch_array($role);
         </button>
         <a class="navbar-brand" href="index.php">
             <div class="text-logo">
-                <img src="assets/images/logo/logo.svg">&nbsp;
+                <!-- <img src="assets/images/logo/logo.svg">&nbsp; -->
                 <font class="font-logo-first">Local</font><font class="font-logo-second">contta</font>
             </div>
         </a>
@@ -127,7 +127,7 @@ $access = mysql_fetch_array($role);
                         </span>
                     </div>
                 </li> -->
-                <li style="background: #002766">
+                <li style="background: #26c5e6">
                     <a href="http://kn-idcore.ap.win.int.kn/" target="_blank"><i class="fa fa-globe fa-fw" style="color: #fff;"></i> 
                         <font style="color: #fff;font-weight: 700;">KN-IDCORE</font>
                     </a>

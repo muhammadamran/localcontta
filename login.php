@@ -69,7 +69,9 @@ if (isset($_POST['submit'])) {
             <div class="wrap-login100">
                 <form class="login100-form validate-form" role="form" method="post" action="">
                     <div class="login-logo">
-                        <img src="assets/images/logo/logo.svg" class="logo-kn">
+                        <center>
+                            <img src="assets/images/logo/logo.svg" class="logo-kn">
+                        </center>
                     </div>
                     <span class="login100-form-title p-b-5 p-t-27">
                         LOCALCONTTA

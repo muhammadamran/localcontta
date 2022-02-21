@@ -3879,7 +3879,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: left;
   padding: 10px;
   font-size: 0px;
-  line-height: 0px;
+  /*line-height: 0px;*/
   height: 0px;
 }
 .navbar-brand:hover,
@@ -5481,6 +5481,7 @@ button.close {
   padding: 10px 20px 0px;
   text-align: right;
   border-top: 1px solid #e5e5e5;
+  margin-bottom: 10px;
 }
 .modal-footer .btn + .btn {
   margin-left: 5px;
