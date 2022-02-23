@@ -22,9 +22,8 @@ if(isset($_POST["create"]))
                           VALUES
                           ('','$username','$password','$email','$role','$scope','$department')");
     if($query) {
-      header("Location: ./iou_adm_user.php?InputSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?InputSuccess=true");                                           
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?InputFailed=true");                                                  
     }
   // General Manager
@@ -41,9 +40,8 @@ if(isset($_POST["create"]))
                           VALUES
                           ('','$username','$password','$email','$role','$scope','$department')");
     if($query) {
-      header("Location: ./iou_adm_user.php?InputSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?InputSuccess=true");
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?InputFailed=true");                                                  
     }
   // Manager
@@ -60,9 +58,8 @@ if(isset($_POST["create"]))
                           VALUES
                           ('','$username','$password','$email','$role','$scope','$department')");
     if($query) {
-      header("Location: ./iou_adm_user.php?InputSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?InputSuccess=true");                                    
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?InputFailed=true");                                                  
     }
   // User
@@ -79,9 +76,8 @@ if(isset($_POST["create"]))
                           VALUES
                           ('','$username','$password','$email','$role','$scope','$department')");
     if($query) {
-      header("Location: ./iou_adm_user.php?InputSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?InputSuccess=true");                                      
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?InputFailed=true");                                                  
     }
   // Guest
@@ -98,9 +94,8 @@ if(isset($_POST["create"]))
                           VALUES
                           ('','$username','$password','$email','$role','$scope','$department')");
     if($query) {
-      header("Location: ./iou_adm_user.php?InputSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?InputSuccess=true");                                        
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?InputFailed=true");                                                  
     }
   }
@@ -113,10 +108,9 @@ if(isset($_POST["delete"]))
   $query = mysql_query("DELETE FROM tb_user WHERE user_id='$ID'");
 
   if($query) {
-    header("Location: ./iou_adm_user.php?DeleteSuccess=true");                                                  
+    header("Location: ./iou_adm_user.php?DeleteSuccess=true");                                            
   } else {
-    // echo "Updated Failed - Please contact your administrator".mysql_error();
-    header("Location: ./iou_adm_user.php?DeleteFailed=true");                                                  
+    header("Location: ./iou_adm_user.php?DeleteFailed=true");                              
   }
 }
 // DELETE ALL
@@ -128,13 +122,12 @@ if(isset($_POST['chk_id']))
     }
 
     if($query) {
-    header("Location: ./iou_adm_user.php?DeleteSuccess=true");                                                  
+      header("Location: ./iou_adm_user.php?DeleteSuccess=true");                                          
     } else {
-      // echo "Updated Failed - Please contact your administrator".mysql_error();
       header("Location: ./iou_adm_user.php?DeleteFailed=true");                                                  
     }
 }
-// UPDATE
+// CHANGE PASSWORD
 if(isset($_POST["change_pass"]))    
 { 
   $cek_ = $_POST['mustbe_change'];
@@ -180,6 +173,7 @@ if(isset($_POST["change_pass"]))
 <div id="wrapper">
   <?php include 'include/header.php';?>
   <div id="page-wrapper">
+    <!-- Page -->
     <div class="row">
       <div class="col-lg-12">
         <h1 class="page-header">
@@ -193,6 +187,7 @@ if(isset($_POST["change_pass"]))
         </nav>
       </div>
     </div>
+    <!-- End Page -->
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default">
@@ -212,7 +207,7 @@ if(isset($_POST["change_pass"]))
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title"><b>[Add Users] </b> Management User</h4>
+                      <h4 class="modal-title"><b>[Add] </b> Management User</h4>
                     </div>
                     <form method="post" action="">
                       <div class="modal-body">
@@ -439,7 +434,7 @@ if(isset($_POST["change_pass"]))
                         echo "<tr>";
                         echo "<td>" . $no . ".</td>";
                         echo "<td style='text-align: center;'>
-                              <input name='chk_id[]' type='checkbox' class='chkbox' value='".$row['user_id']."'/ $show_btn>
+                              <input name='chk_id[]' type='checkbox' class='chkbox' value='".$row['user_id']."' $show_btn>
                               </td>";
                         echo "<td>" . $row['user_name'] . "</td>";
                         if ($row['user_pass'] == 'changeme') {
@@ -450,8 +445,6 @@ if(isset($_POST["change_pass"]))
                                </td>";
                         } else {
                           echo "<td style='text-align: center;'>
-                               <font style='font-size: 12px;color: #000;'>" . $row['user_pass'] . "</font>
-                               <br>
                                <font style='font-size: 10px;font-weight: 300;'><i>Log: " . $row['user_pass_update'] . "</i></font>
                                <br>
                                <font style='font-size: 10px;font-weight: 300;'><i>By: " . $row['user_pass_update_by'] . "</i></font>
@@ -495,7 +488,7 @@ if(isset($_POST["change_pass"]))
                         echo "</tr>";
                         ?>
                         <!-- Change Password -->
-                        <div class="modal fade" id="pass<?=$row['user_id'];?>" role="dialog">
+                        <div class="modal fade" id="pass<?= $row['user_id'];?>" role="dialog">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -506,8 +499,8 @@ if(isset($_POST["change_pass"]))
                                 <div class="modal-body">
                                   <div class="form-group">
                                     <label>User Name</label>
-                                    <input type="text" name="username" class="form-control" placeholder="client name" value="<?=$row['user_name'];?>" required readonly>
-                                    <input type="hidden" name="uid" class="form-control" placeholder="client name" value="<?=$row['user_id'];?>" required>
+                                    <input type="text" name="username" class="form-control" value="<?= $row['user_name'];?>" required readonly>
+                                    <input type="hidden" name="uid" class="form-control" value="<?= $row['user_id'];?>" required>
                                   </div>
                                   <div class="form-group" id="new_pass" style="display: show;">
                                     <label>New Password <font style="color: red;">*</font></label>
@@ -535,28 +528,28 @@ if(isset($_POST["change_pass"]))
                         </div>
                         <!-- End Change Password -->
                         <!-- Delete -->
-                        <div class="modal fade" id="delete<?=$row['user_id'];?>" role="dialog">
+                        <div class="modal fade" id="delete<?= $row['user_id'];?>" role="dialog">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[Delete Users] </b> Management User</h4>
+                                <h4 class="modal-title"><b>[Delete] </b> Management User</h4>
                               </div>
                               <form method="post" action=" ">
                                 <div class="modal-body">
                                     <div class="form-group">
                                       <label>Are you sure delete this user?</label>
-                                      <h6>User Name : <?=$row['user_name'];?></h6>
-                                      <input type="hidden" name="uid" class="form-control" placeholder="client name" value="<?=$row['user_id'];?>" required>
+                                      <h6>User Name : <?= $row['user_name'];?></h6>
+                                      <input type="hidden" name="uid" class="form-control" value="<?= $row['user_id'];?>" required>
                                     </div>
                                     <div class="form-group">
-                                      <h6>Role : <?=$row['user_role'];?></h6>
+                                      <h6>Role : <?= $row['user_role'];?></h6>
                                     </div>
                                     <div class="form-group">
-                                      <h6>Scope : <?=$row['user_scope'];?></h6>
+                                      <h6>Scope : <?= $row['user_scope'];?></h6>
                                     </div>
                                     <div class="form-group">
-                                      <h6>Department : <?=$row['user_dept'];?></h6>
+                                      <h6>Department : <?= $row['user_dept'];?></h6>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -568,11 +561,10 @@ if(isset($_POST["change_pass"]))
                           </div>
                         </div>
                         <!-- Delete -->
-                        <?php
-                      }
+                    <?php }
                     } else {
                       echo "<tr>";
-                      echo "<td colspan='7' align='center'><b><i>" . "No Available Record" . "</i></b></td>";
+                      echo "<td colspan='8' align='center'><b><i>" . "No Available Record" . "</i></b></td>";
                       echo "</tr>";
                     }  mysqli_close($con); 
                     ?>

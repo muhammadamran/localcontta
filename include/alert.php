@@ -26,7 +26,7 @@
         Swal.fire({
             title: 'Failed Alert!',
             icon: 'error',
-            text: 'Data failed to save!!',
+            text: 'Data failed to save, please contact your administrator!',
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
@@ -46,7 +46,7 @@
         Swal.fire({
             title: 'Update Alert!',
             icon: 'info',
-            text: 'Data failed to updated!',
+            text: 'Data failed to updated, please contact your administrator!',
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
@@ -66,7 +66,7 @@
         Swal.fire({
             title: 'Delete Alert!',
             icon: 'info',
-            text: 'Data failed to delete!',
+            text: 'Data failed to delete, please contact your administrator!',
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
@@ -86,11 +86,66 @@
         Swal.fire({
             title: 'Update Alert!',
             icon: 'info',
-            text: 'Data failed to updated!',
+            text: 'Data failed to updated, please contact your administrator!',
         })
         history.replaceState({}, '', './iou_adm_user.php');
     }
     // End Change Password
+</script>
+
+<!-- Consignee -->
+<script type="text/javascript">
+    // Input - Add
+    if (window?.location?.href?.indexOf('CaddSuccess') > -1) {
+        Swal.fire({
+            title: 'Success Alert!',
+            icon: 'success',
+            text: 'Data saved successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('CaddFailed') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Data failed to save, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('CaddReady') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Consignee Name already registered, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+    // End Input - Add
+
+    // Update Data
+    // End Update Data
+
+    // Delete
+    if (window?.location?.href?.indexOf('DeleteSuccess') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data delete successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('DeleteFailed') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data failed to delete, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+    // End Delete
 </script>
 
 <!-- Swal.fire({

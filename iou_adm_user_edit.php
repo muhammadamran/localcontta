@@ -19,7 +19,7 @@ if(isset($_POST["edit"]))
   // Admin
   $cekRole =  $_POST['user_role_edit'];
   if ($cekRole == 'admin') {
-    $email                = $_POST['admin_user_mail'];
+    $email                = $_POST['admin_user_mail_edit'];
     $role                 = $_POST['user_role_edit'];
     $scope                = $_POST['admin_scope_edit'];
     $department           = $_POST['admin_dept_edit'];
@@ -127,7 +127,7 @@ if(isset($_POST["edit"]))
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<i class="fa fa-table"></i> Management Users | <i class="fa fa-user"></i> <?= $row['user_name'];?>
+						<i class="fa fa-table"></i> [Edit] Management Users - <?= $row['user_name'];?>
 					</div>
 					<div class="panel-body">
 						<form method="post" action=" ">
@@ -242,7 +242,7 @@ if(isset($_POST["edit"]))
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Department</label>
+											<label>Department <font style="color: red;">*</font></label>
 											<select class="form-control" id="id_manager_dept_edit" name="manager_dept">
 												<?php if ($row['user_dept'] == 'sea') { ?>
 													<option value="<?= $row['user_dept'] ?>">Sea Freight</option>
@@ -267,7 +267,7 @@ if(isset($_POST["edit"]))
 								<div class="row" id="user_input_edit" style="display:none;">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Scope</label>
+											<label>Scope <font style="color: red;">*</font></label>
 											<select class="form-control" id="id_user_scope" name="user_scope_edit">
 												<?php if ($row['user_role'] == 'user') { ?>
 													<option value="<?= $row['user_scope'] ?>"><?= $row['user_scope'] ?></option>
@@ -284,7 +284,7 @@ if(isset($_POST["edit"]))
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Department</label>
+											<label>Department <font style="color: red;">*</font></label>
 											<select class="form-control" id="id_user_dept" name="user_dept_edit">
 												<?php if ($row['user_role'] == 'user' || $row['user_role'] == 'manager') { ?>
 													<?php if ($row['user_dept'] == 'sea') { ?>

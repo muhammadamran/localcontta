@@ -41,6 +41,14 @@ Icon and Logo*/
 /*Icon and Logo*/
 
 /*Alert*/
+.alert-info {
+	padding: 20px;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+	color: #31708f;
+	border-radius: 5px;
+}
+
 .alert-danger {
 	padding: 20px;
 	background-color: #f44336;

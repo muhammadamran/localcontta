@@ -70,6 +70,10 @@
     body {
         font-family: "Poppins",sans-serif;
     }
+
+    tbody {
+        font-size: 14px;
+    }
 </style>
 <script type="text/javascript"> 
     function display_c(){

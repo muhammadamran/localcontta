@@ -37,5 +37,12 @@
 				"orderable": false,
 			}]
 		});
+		$('#consignee').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
 	});
 </script>
