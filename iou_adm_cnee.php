@@ -4,6 +4,7 @@ include "include/connection.php";
 include "include/restrict.php";
 include "include/datatables.php";
 
+// ADD
 if(isset($_POST["create"]))    
 { 
   $check_c = $_POST['cname'];
@@ -37,6 +38,44 @@ if(isset($_POST["create"]))
       header("Location: ./iou_adm_cnee.php?CaddReady=true");                                                  
   }
 }
+// EDIT
+if(isset($_POST["edit"]))    
+{ 
+  $check_c = $_POST['cname'];
+  $check_t = $_POST['ctype'];
+
+  $con=mysqli_connect("localhost","root","","contta");
+  if (mysqli_connect_errno())
+  {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+  $result = mysqli_query($con,"SELECT user_name,type FROM tb_cnee WHERE user_name ='$check_c' AND type='$check_t'");
+  $vald_c = mysqli_fetch_array($result);
+
+  if ($vald_c == NULL) {
+    $uid                  = $_POST['uid'];
+    $cname                = $_POST['cname'];
+    $caddress             = $_POST['caddress'];
+    $type                 = $_POST['ctype'];
+    $regdate              = date('Y-m-d h:m:i');
+    $regby                = $_POST['regby'];
+
+    $query = mysql_query("UPDATE tb_cnee SET user_name='$cname',
+                                             user_address='$caddress',
+                                             type='$type',
+                                             regdate='$regdate',
+                                             regby='$regby'
+                                             WHERE user_id='$uid'");
+
+    if($query){
+      header("Location: ./iou_adm_cnee.php?CUpdateSuccessCC=true");                                      
+    } else {
+      header("Location: ./iou_adm_cnee.php?CUpdateFailed=true");                                                  
+    }
+  } else {
+      header("Location: ./iou_adm_cnee.php?CUpdateReady=true");                                                  
+  }
+}
 // DELETE
 if(isset($_POST["delete"]))    
 {
@@ -49,6 +88,23 @@ if(isset($_POST["delete"]))
   } else {
     header("Location: ./iou_adm_cnee.php?DeleteFailed=true");                              
   }
+}
+
+// FUNCTION SEARCHING
+$findCN = '';
+$findType = '';
+if(isset($_GET['findone']))
+{
+  $findCN = $_GET['findCN'];
+  $findType = $_GET['findType'];
+}
+
+$startdate = '';
+$enddate = '';
+if(isset($_GET['findtwo']))
+{
+  $startdate = $_GET['startdate'];
+  $enddate = $_GET['enddate'];
 }
 ?>
 <?php include 'include/head.php';?>
@@ -70,6 +126,86 @@ if(isset($_POST["delete"]))
       </div>
     </div>
     <!-- End Page -->
+    <!-- Search -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fas fa-filter"></i> Filter Data - by
+            <select type="text" id="findby" style="background: transparent;border-color: transparent;">
+              <option value="opone">Consignee</option>
+              <option value="optwo">Date Range</option>
+            </select>
+          </div>
+          <div class="panel-body">
+            <div class="page-add">
+              <form method="get" action="iou_adm_cnee.php" id="fformone" style="display: show;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Consignee Name </label>
+                      <?php if ($findCN == '') { ?>
+                        <input type="text" name="findCN" class="form-control" placeholder="Consignee Name...">
+                      <?php } else { ?>
+                        <input type="text" name="findCN" class="form-control" placeholder="Consignee Name..." value="<?= $findCN; ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select type="text" name="findType" class="form-control">
+                        <?php if ($findType == '') { ?>
+                        <option value="">-- Select Type --</option>
+                        <?php } else { ?>
+                        <option value="<?= $findType; ?>"><?= $findType; ?></option>
+                        <option value="">-- Select Type --</option>
+                        <?php } ?>
+                        <option value="import">Import</option>
+                        <option value="export">Export</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="text-align: right;">
+                    <a href="iou_adm_cnee.php" type="button" class="btn btn-info"><i class="fas fa-redo"></i> Reset</a>
+                    <button type="submit" name="findone" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                  </div>
+                </div>
+              </form>
+              <form method="get" action="iou_adm_cnee.php" id="fformtwo" style="display: none;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Start Date</label>
+                      <?php if ($startdate == '') { ?>
+                        <input type="date" name="startdate" class="form-control">
+                      <?php } else { ?>
+                        <input type="date" name="startdate" class="form-control" value="<?= $startdate ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>End Date</label>
+                      <?php if ($enddate == '') { ?>
+                        <input type="date" name="enddate" class="form-control">
+                      <?php } else { ?>
+                        <input type="date" name="enddate" class="form-control" value="<?= $enddate ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="text-align: right;">
+                    <a href="iou_adm_cnee.php" type="button" class="btn btn-info"><i class="fas fa-redo"></i> Reset</a>
+                    <button type="submit" name="findtwo" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Search -->
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default">
@@ -164,7 +300,19 @@ if(isset($_POST["delete"]))
                   {
                     echo "Failed to connect to MySQL: " . mysqli_connect_error();
                   }
-                  $result = mysqli_query($con,"SELECT * FROM tb_cnee ORDER BY regdate DESC LIMIT 50");
+                  // $result = mysqli_query($con,"SELECT * FROM tb_cnee ORDER BY regdate DESC LIMIT 50");
+                  if(isset($_GET['findone']))
+                  {
+                    $findCN = $_GET['findCN'];
+                    $findType = $_GET['findType'];
+                    $result = mysqli_query($con,"SELECT * FROM tb_cnee WHERE user_name LIKE '%$findCN%' AND type LIKE '%$findType%'");       
+                  } else if(isset($_GET['findtwo'])) {
+                    $startdate = $_GET['startdate'];
+                    $enddate = $_GET['enddate'];
+                    $result = mysqli_query($con,"SELECT * FROM tb_cnee WHERE regdate BETWEEN '$startdate' AND '$enddate'");  
+                  } else {
+                    $result = mysqli_query($con,"SELECT * FROM tb_cnee ORDER BY regdate DESC LIMIT 50");   
+                  }
                   if(mysqli_num_rows($result)>0){
                     $no=0;
                     while($row = mysqli_fetch_array($result))
@@ -229,6 +377,53 @@ if(isset($_POST["delete"]))
                         </div>
                       </div>
                       <!-- Address -->
+                      <!-- Edit -->
+                      <div class="modal fade" id="edit<?= $row['user_id'];?>" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title"><b>[Edit] </b> Consignee</h4>
+                            </div>
+                            <form method="post" action="">
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                      <label>Consignee Name</label>
+                                      <input type="text" name="cname" class="form-control" placeholder="Consignee Name..." value="<?= $row['user_name'] ?>">
+                                      <input type="hidden" name="uid" class="form-control" value="<?= $row['user_id'] ?>">
+                                      <input type="hidden" name="regby" class="form-control" value="<?= $_SESSION['username'] ;?>">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                      <label>Consignee Address</label>
+                                      <textarea type="text" name="caddress" class="form-control" placeholder="Consignee Address..."><?= $row['user_address'] ?></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                      <label>Type</label>
+                                      <select class="form-control" id="id_manager_dept" name="ctype">
+                                        <option value="<?= $row['type'] ?>"><?= $row['type'] ?></option>
+                                        <option value="">-- Select Type --</option>
+                                        <option value="import">Import</option>
+                                        <option value="export">Export</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit" name="edit" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
+                                <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="far fa-times-circle"></i> Close</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Edit -->
                       <!-- Delete -->
                       <div class="modal fade" id="delete<?= $row['user_id'];?>" role="dialog">
                         <div class="modal-dialog">
@@ -278,5 +473,102 @@ if(isset($_POST["delete"]))
 </div>
 <?php 
 include 'include/jquery.php';
-include 'include/alert.php';
 ?>
+<!-- Consignee -->
+<script type="text/javascript">
+    // Input - Add
+    if (window?.location?.href?.indexOf('CaddSuccess') > -1) {
+        Swal.fire({
+            title: 'Success Alert!',
+            icon: 'success',
+            text: 'Data saved successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('CaddFailed') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Data failed to save, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('CaddReady') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Consignee Name already registered, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+    // End Input - Add
+
+    // Update Data
+    if (window?.location?.href?.indexOf('CUpdateSuccessCC') > -1) {
+        Swal.fire({
+            title: 'Success Alert!',
+            icon: 'success',
+            text: 'Data updated successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('CUpdateFailed') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Data failed to updated, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('CUpdateReady') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Consignee Name already registered, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+    // End Update Data
+
+    // Delete
+    if (window?.location?.href?.indexOf('DeleteSuccess') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data delete successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+
+    if (window?.location?.href?.indexOf('DeleteFailed') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data failed to delete, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_cnee.php');
+    }
+    // End Delete
+</script>
+<!-- Search -->
+<script type="text/javascript">
+  $(function() {
+    $("#findby").change(function() {
+      if ($(this).val() == "opone") {
+        $("#fformone").show();
+        $("#fformtwo").hide();
+      } else if ($(this).val() == "optwo") {
+        $("#fformtwo").show();
+        $("#fformone").hide();
+      } else {
+        $("#fformone").hide();
+        $("#fformtwo").hide();
+      }
+    });
+  });
+</script>
+<!-- End Search -->

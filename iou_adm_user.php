@@ -127,47 +127,6 @@ if(isset($_POST['chk_id']))
       header("Location: ./iou_adm_user.php?DeleteFailed=true");                                                  
     }
 }
-// CHANGE PASSWORD
-if(isset($_POST["change_pass"]))    
-{ 
-  $cek_ = $_POST['mustbe_change'];
-  if ($cek_ == '1') { 
-    $ID                  = $_POST['uid'];
-    $user_pass           = $_POST['new_pass'];
-    $user_pass_update    = date('Y-m-d h:m:i');
-    $user_pass_update_by = $_POST['user_pass_update_by'];
-    $mustbe_change       = '1';
-
-
-    $query = mysql_query("UPDATE tb_user SET user_pass='$user_pass',
-                                             user_pass_update= '$user_pass_update',
-                                             user_pass_update_by= '$user_pass_update_by',
-                                             mustbe_change= '$mustbe_change'
-                                             WHERE user_id=$ID");
-
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdatePassSuccess=true");                                      
-    } else {
-      header("Location: ./iou_adm_user.php?UpdatePassFailed=true");                                                  
-    }
-  } else {
-    $ID                  = $_POST['uid'];
-    $user_pass           = $_POST['new_pass'];
-    $user_pass_update    = date('Y-m-d h:m:i');
-    $user_pass_update_by = $_POST['user_pass_update_by'];
-
-    $query = mysql_query("UPDATE tb_user SET user_pass='$user_pass',
-                                             user_pass_update= '$user_pass_update',
-                                             user_pass_update_by= '$user_pass_update_by'
-                                             WHERE user_id=$ID");
-
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdatePassSuccess=true");                                       
-    } else {
-      header("Location: ./iou_adm_user.php?UpdatePassFailed=true");                                                  
-    }
-  }
-}
 ?>
 <?php include 'include/head.php';?>
 <div id="wrapper">
@@ -474,8 +433,8 @@ if(isset($_POST["change_pass"]))
                         <i class='fa fa-pencil'></i>
                         </span>
                         </a>
-                        <a href='#' data-toggle='".$modal_btn."' data-target='#pass$row[user_id]' title='Change Password'>
-                        <span class='btn btn-sm btn-change $show_btn'>
+                        <a href='iou_adm_user_cp.php?user_id=$row[user_id]' target='_blank' title='Edit'>
+                        <span class='btn btn-sm btn-change' $show_btn>
                         <i class='fa fa-unlock'></i>
                         </span>
                         </a>
@@ -487,46 +446,6 @@ if(isset($_POST["change_pass"]))
                         </td>";
                         echo "</tr>";
                         ?>
-                        <!-- Change Password -->
-                        <div class="modal fade" id="pass<?= $row['user_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[Change Password]</b> Management Users</h4>
-                              </div>
-                              <form method="post" action=" ">
-                                <div class="modal-body">
-                                  <div class="form-group">
-                                    <label>User Name</label>
-                                    <input type="text" name="username" class="form-control" value="<?= $row['user_name'];?>" required readonly>
-                                    <input type="hidden" name="uid" class="form-control" value="<?= $row['user_id'];?>" required>
-                                  </div>
-                                  <div class="form-group" id="new_pass" style="display: show;">
-                                    <label>New Password <font style="color: red;">*</font></label>
-                                    <input type="password" name="new_pass" id="password-field" class="form-control" placeholder="New password" required>
-                                    <!-- Icon Eye -->
-                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                                    <!-- End Icon Eye -->
-                                    <input type="hidden" name="uid" value="<?= $row['user_id'];?>">
-                                    <input type="hidden" name="user_pass_update_by" value="<?= $_SESSION['username'];?>">
-                                  </div>
-                                  <div class="form-group">
-                                    <input id="mustbe_change" type="checkbox"  name="mustbe_change" value="1">
-                                    <label for="mustbe_change">
-                                        <font style="font-weight: 400">Click if the user must update the password after sign in.</font>
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="submit" name="change_pass" class="btn btn-change"><i class="fa fa-unlock"></i> Change Password</button>
-                                  <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="far fa-times-circle"></i> Close</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End Change Password -->
                         <!-- Delete -->
                         <div class="modal fade" id="delete<?= $row['user_id'];?>" role="dialog">
                           <div class="modal-dialog">
@@ -582,21 +501,6 @@ if(isset($_POST["change_pass"]))
 include 'include/jquery.php';
 include 'include/alert.php';
 ?>
-<!-- Show Password in Change Password -->
-<script type="text/javascript">
-  $(".toggle-password").click(function() {
-
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    var input = $($(this).attr("toggle"));
-    if (input.attr("type") == "password") {
-      input.attr("type", "text");
-    } else {
-      input.attr("type", "password");
-    }
-  });
-</script>
-<!-- End Show Password in Change Password -->
-
 <!-- Delete also Checklist ALL -->
 <script type="text/javascript">
   $(document).ready(function(){
@@ -782,3 +686,86 @@ include 'include/alert.php';
   });
 </script>
 <!-- End Add, Edit, Validasi -->
+
+<!-- Managemen Users -->
+<script type="text/javascript">
+    // Input - Add
+    if (window?.location?.href?.indexOf('InputSuccess') > -1) {
+        Swal.fire({
+            title: 'Success Alert!',
+            icon: 'success',
+            text: 'Data saved successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('InputFailed') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Data failed to save, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+    // End Input - Add
+
+    // Update Data
+    if (window?.location?.href?.indexOf('UpdateSuccess') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data updated successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('UpdateFailed') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data failed to updated, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+    // End Update Data
+
+    // Delete
+    if (window?.location?.href?.indexOf('DeleteSuccess') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data delete successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('DeleteFailed') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data failed to delete, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+    // End Delete
+
+    // Change Password
+    if (window?.location?.href?.indexOf('UpdatePassSuccess') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data updated successfully!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+
+    if (window?.location?.href?.indexOf('UpdatePassFailed') > -1) {
+        Swal.fire({
+            title: 'Update Alert!',
+            icon: 'info',
+            text: 'Data failed to updated, please contact your administrator!',
+        })
+        history.replaceState({}, '', './iou_adm_user.php');
+    }
+    // End Change Password
+</script>

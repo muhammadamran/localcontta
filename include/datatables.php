@@ -44,5 +44,12 @@
 				"orderable": false,
 			}]
 		});
+		$('#shipper').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
 	});
 </script>
