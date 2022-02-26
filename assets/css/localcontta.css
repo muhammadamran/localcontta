@@ -17,6 +17,16 @@ Icon and Logo*/
 	box-sizing: border-box;
 }
 
+.card_divider {
+	background: rgb(255 255 255);
+    height: 1px;
+    width: calc(100% - -1px);
+    margin: 0px 0px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .statement-login {
 	display: flex;
 	justify-content: center;
@@ -187,10 +197,10 @@ li.show {
 /*Icon Title Page*/
 .icon-title {
 	background: linear-gradient(45deg, #26c5e6, #26c5e6);
-    padding: 10px;
-    border-radius: 5px;
-    color: #fff;
-    box-shadow: 0 0 12px rgb(38 197 230);
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	box-shadow: 0 0 12px rgb(38 197 230);
 }
 /*End Icon Title Page*/
 
@@ -240,16 +250,73 @@ li.show {
 
 /*Page Add Up Table*/
 .page-add {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 /*End Page Add Up Table*/
 
 /*Icon Show Password*/
 .field-icon {
 	float: right;
-    margin-right: 15px;
-    margin-top: -25px;
-    position: relative;
-    z-index: 2;
+	margin-right: 15px;
+	margin-top: -25px;
+	position: relative;
+	z-index: 2;
 }
-/*End Icon Show Password
+/*End Icon Show Password*/
+
+.card {
+	box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #002765;
+	background-clip: border-box;
+	border: 0 solid rgb(0 39 101);
+	border-radius: 5px;
+	color: #fff;
+	box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+	margin-bottom: 10px;
+}
+.card .card-body {
+	padding: 40px;
+	margin-top: -25px;
+	margin-bottom: -25px;
+}
+
+.card-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.bg-gradient-primary {
+	background-image: linear-gradient(310deg,#7928ca,#ff0080);
+}
+.icon-shape .ni {
+	top: 14px;
+}
+.icon-shape i {
+	color: #fff;
+	opacity: .8;
+	top: 11px;
+	position: relative;
+}
+.icon-bg-na {
+	background: linear-gradient(45deg, #26c5e6, #3170aa);
+	padding: 10px;
+	border-radius: 5px;
+	/*box-shadow: 0px 0px 20px 2px rgb(45 147 194);*/
+}
+.icon-bg-na:hover {
+	background: linear-gradient(45deg, #26c5e6, #3170aa);
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 20px 2px rgb(45 147 194);
+}
+.detail-na {
+	font-size: 30px;
+}

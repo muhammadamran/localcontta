@@ -51,5 +51,19 @@
 				"orderable": false,
 			}]
 		});
+		$('#trucker').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#document').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
 	});
 </script>

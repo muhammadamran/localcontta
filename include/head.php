@@ -90,37 +90,37 @@
 </script>
 <?php
 // DATE
-function tanggal_indo($tanggal, $cetak_hari = false)
+function date_indo($date, $print_day = false)
 {
-  $hari = array ( 1 =>    
-    'Senin',
-    'Selasa',
-    'Rabu',
-    'Kamis',
-    'Jumat',
-    'Sabtu',
-    'Minggu'
+  $day = array ( 1 =>    
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
   );
-  $bulan = array (1 =>   
-    'Januari',
-    'Februari',
-    'Maret',
+  $month = array (1 =>   
+    'January',
+    'February',
+    'March',
     'April',
-    'Mei',
-    'Juni',
-    'Juli',
-    'Agustus',
+    'May',
+    'June',
+    'July',
+    'August',
     'September',
-    'Oktober',
+    'October',
     'November',
-    'Desember'
+    'December'
   );
-  $split    = explode('-', $tanggal);
-  $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+  $split    = explode('-', $date);
+  $tgl_indo = $split[2] . ' ' . $month[ (int)$split[1] ] . ' ' . $split[0];
   
-  if ($cetak_hari) {
-    $num = date('N', strtotime($tanggal));
-    return $hari[$num] . ', ' . $tgl_indo;
+  if ($print_day) {
+    $num = date('N', strtotime($date));
+    return $day[$num] . ', ' . $tgl_indo;
   }
   return $tgl_indo;
 }

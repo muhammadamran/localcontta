@@ -278,9 +278,60 @@ if(isset($_GET['findtwo']))
                 <div class="alert-info">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Information!</strong> Total Shipper on Localcontta: <b><?= $cont_c['total'] ?> Shipper</b>.
-                  <p style="margin-bottom: 0px;">Shipper List on tables only shows the last 50 data, search companies' names if you can't find them in the table.</p>
+                  <p style="margin-bottom: 0px;">Shipper List on tables only shows the last 50 data, search Shipper' names if you can't find them in the table.</p>
                 </div>
             </div>
+            
+            <!-- Count Export Import -->
+            <?php
+            $con=mysqli_connect("localhost","root","","contta");
+            if (mysqli_connect_errno())
+            {
+              echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            }
+            $result_export = mysqli_query($con,"SELECT COUNT(*) AS total_export FROM tb_shipper WHERE type='export'");
+            $cont_export = mysqli_fetch_array($result_export);
+
+            $result_import = mysqli_query($con,"SELECT COUNT(*) AS total_import FROM tb_shipper WHERE type='import'");
+            $cont_import = mysqli_fetch_array($result_import);
+            ?>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body p-3">
+                    <div class="card-content">
+                      <div style="display: grid;">
+                        <font style="font-size: 25px;font-weight: 600;">Export</font>
+                        <font style="font-size: 16px;font-weight: 600;"><?= $cont_export['total_export'] ?> Shipper</font>
+                        <div class="card_divider"></div>
+                        <font style="font-size: 10px;font-weight: 300;"><?= date_indo(date('Y-m-d'), true); ?></font>
+                      </div>
+                      <div class="icon-bg-na">
+                        <i class="fa fa-box fa-fw detail-na" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body p-3">
+                    <div class="card-content">
+                      <div style="display: grid;">
+                        <font style="font-size: 25px;font-weight: 600;">Import</font>
+                        <font style="font-size: 16px;font-weight: 600;"><?= $cont_import['total_import'] ?> Shipper</font>
+                        <div class="card_divider"></div>
+                        <font style="font-size: 10px;font-weight: 300;"><?= date_indo(date('Y-m-d'), true); ?></font>
+                      </div>
+                      <div class="icon-bg-na">
+                        <i class="fa fa-dolly-flatbed fa-fw detail-na" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Count Export Import -->
             <div class="table-responsive">
               <table class="display hover" id="shipper">
                 <thead>
