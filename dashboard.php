@@ -888,5 +888,5 @@ $Gcont_export_AIR = mysqli_fetch_array($Gresult_export_AIR);
         }
     });
 </script>
-<p><?= $result_YearImport ?></p>
-<p><?= $result_YearExport ?></p>
+<!-- <p><?= $result_YearImport ?></p> -->
+<!-- <p><?= $result_YearExport ?></p> -->
