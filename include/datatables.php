@@ -30,6 +30,13 @@
 <script src="assets/js/dataTables.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$('#dahsboardOne').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
 		$('#users').DataTable({
 			"order": [],
 			"columnDefs": [{
@@ -59,6 +66,27 @@
 			}]
 		});
 		$('#document').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#PricingRate').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#RecordManagementExport').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#RecordManagementImport').DataTable({
 			"order": [],
 			"columnDefs": [{
 				"targets": 'no-sort',

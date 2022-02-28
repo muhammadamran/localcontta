@@ -1,4 +1,4 @@
-Icon and Logo*/
+/*Icon and Logo*/*/
 .login-logo {
 	display: flex;
 	justify-content: center;
@@ -319,4 +319,14 @@ li.show {
 }
 .detail-na {
 	font-size: 30px;
+}
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }

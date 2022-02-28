@@ -127,18 +127,21 @@ $access = mysql_fetch_array($role);
                         </span>
                     </div>
                 </li> -->
-                <li style="background: #26c5e6">
+                <!-- <li style="background: #26c5e6">
                     <a href="http://kn-idcore.ap.win.int.kn/" target="_blank"><i class="fa fa-globe fa-fw" style="color: #fff;"></i> 
                         <font style="color: #fff;font-weight: 700;">KN-IDCORE</font>
                     </a>
-                </li>
+                </li> -->
                 <li class="section">
                     <div>
                         GENERAL SECTION
                     </div>
                 </li>
                 <li>
-                    <a class="<?= $uriSegments[2] == 'index.php' ? 'active' : '' ?>" href="index.php"><i class="fa fa-chart-pie fa-fw"></i> Dashboard</a>
+                    <a class="<?= $uriSegments[2] == 'index.php' ? 'active' : '' ?>" href="index.php"><i class="fas fa-house-user fa-fw"></i> Home</a>
+                </li>
+                <li>
+                    <a class="<?= $uriSegments[2] == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php"><i class="fa fa-chart-pie fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a class="<?= $uriSegments[2] == 'search.php' ? 'active' : '' ?>" href="search.php"><i class="fa fa-search fa-fw"></i> Search</a>

@@ -27,8 +27,19 @@
         <li class="<?= $uriSegments[2] == 'iou_adm_rate.php' ? 'show' : '' ?>">
             <a href="iou_adm_rate.php"><i class="fas fa-caret-right" aria-hidden="true"></i> Pricing/Rate</a>
         </li>
-        <li class="<?= $uriSegments[2] == 'iou_adm_record.php' ? 'show' : '' ?>">
+        <!-- <li class="<?= $uriSegments[2] == 'iou_adm_record.php' ? 'show' : '' ?>">
             <a href="iou_adm_record.php?ref=000000&type=39393"><i class="fas fa-caret-right" aria-hidden="true"></i> Record Management</a>
+        </li> -->
+    </ul>
+
+<li class="<?= $uriSegments[2] == 'iou_adm_record_export.php' || $uriSegments[2] == 'iou_adm_record_import.php' ? 'active' : '' ?>">
+    <a class="<?= $uriSegments[2] == 'iou_adm_record_export.php' || $uriSegments[2] == 'iou_adm_record_import.php' ? 'active' : '' ?>" href="#"><i class="fas fa-tasks"></i> Record Management<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">
+        <li class="<?= $uriSegments[2] == 'iou_adm_record_export.php' ? 'show' : '' ?>">
+            <a href="iou_adm_record_export.php"><i class="fas fa-caret-right" aria-hidden="true"></i> Export</a>
+        </li>
+        <li class="<?= $uriSegments[2] == 'iou_adm_record_import.php' ? 'show' : '' ?>">
+            <a href="iou_adm_record_import.php"><i class="fas fa-caret-right" aria-hidden="true"></i> Import</a>
         </li>
     </ul>
 </li>
