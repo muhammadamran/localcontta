@@ -66,7 +66,7 @@ if(isset($_POST["change_pass"]))
 				</h1>
 				<nav aria-label="breadcrumb" role="navigation">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+						<li class="breadcrumb-item"><a href="index.php">Home</a></li>
 						<li class="breadcrumb-item">Management Users</li>
 						<li class="breadcrumb-item active" aria-current="page">Change Password Users</li>
 					</ol>

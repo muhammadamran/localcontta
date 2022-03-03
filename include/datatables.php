@@ -37,6 +37,41 @@
 				"orderable": false,
 			}]
 		});
+		$('#FINDreftnImport').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#FINDreftnExport').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#FINDAjuImport').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#FINDAjuExport').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
+		$('#TruckConfirmJob').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
 		$('#users').DataTable({
 			"order": [],
 			"columnDefs": [{

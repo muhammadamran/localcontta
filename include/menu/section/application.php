@@ -18,13 +18,10 @@
                 $cus_total = mysqli_num_rows($result1);
                 if ($cus_total == 0) {                            
                     ?>
-
                     <li>
                         <a class="#" href="ship_cus.php"><i class="#"></i>1) Custom Arrangement </a>
                     </li>
-
                 <?php } else { ?>
-
                     <li>
                         <a class="#" href="ship_cus.php"><i class="#"></i>1) Custom Arrangement <i class="btn btn-danger btn-circle"><?php echo $cus_total;?></i></a>
                     </li>
@@ -50,11 +47,9 @@
                 $cus_total = mysqli_num_rows($result1);
                 if ($cus_total == 0) {                            
                     ?>
-
                     <li>
                         <a class="#" href="ship_cus.php"><i class="#"></i>1) Custom Arrangement </a>
                     </li>
-
                 <?php } else { ?>
                     <li>
                         <a class="#" href="ship_cus.php"><i class="#"></i>1) Custom Arrangement <i class="btn btn-danger btn-circle"><?php echo $cus_total;?></i></a>
@@ -92,17 +87,13 @@
                 $total1 = mysqli_num_rows($result1);
                 if ($total1 == 0) {                            
                     ?>
-
                     <li>
                         <a href="air_import_master.php">Import Master</a>
                     </li>
-
                 <?php } else { ?>
-
                     <li>
                         <a class="#" href="air_import_master.php"><i class="#"></i>Import Master <i class="btn btn-primary btn-circle"><?php echo $total1;?></i></a>
                     </li>
-
                 <?php } ?>
                 <?php 
                 $con=mysqli_connect("localhost","root","","contta");
@@ -110,17 +101,13 @@
                 $total2 = mysqli_num_rows($result2);
                 if ($total2 == 0) {                            
                     ?>
-
                     <li>
                         <a class="#" href="air_imp_pre.php"><i class="#"></i>1) Pre-Clearance</a>
                     </li>
-
                 <?php } else { ?>
-
                     <li>
                         <a class="#" href="air_imp_pre.php"><i class="#"></i>1) Pre-Clearance <i class="btn btn-primary btn-circle"><?php echo $total2;?></i></a>
                     </li>
-
                 <?php } ?>
                 <?php 
                 $con=mysqli_connect("localhost","root","","contta");
@@ -128,17 +115,13 @@
                 $total3 = mysqli_num_rows($result3);
                 if ($total3 == 0) {                            
                     ?>
-
                     <li>
                         <a class="#" href="air_imp_clear.php"><i class="#"></i>2) Clearance</a>
                     </li>
-
                 <?php } else { ?>
-
                     <li>
                         <a class="#" href="air_imp_clear.php"><i class="#"></i>2) Clearance <i class="btn btn-primary btn-circle"><?php echo $total3;?></i></a>
                     </li>
-
                 <?php } ?>
                 <?php 
                 $con=mysqli_connect("localhost","root","","contta");
@@ -146,13 +129,10 @@
                 $total4 = mysqli_num_rows($result4);
                 if ($total4 == 0) {                            
                     ?>
-
                     <li>
                         <a class="#" href="air_imp_post.php"><i class="#"></i>3) Post Clearance</a>
                     </li>
-
                 <?php } else { ?>
-
                     <li>
                         <a class="#" href="air_imp_post.php"><i class="#"></i>3) Post Clearance <i class="btn btn-primary btn-circle"><?php echo $total4;?></i></a>
                     </li>
@@ -169,7 +149,6 @@
                 </li>
             </ul>
         </li>
-
         <li>
             <a href="#" style="background-color: skyblue;color: white"><i class="fa fa-files-o fa-fw"></i> <b>Seafreight</b><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -179,7 +158,6 @@
                 $total1 = mysqli_num_rows($result1);
                 if ($total1 == 0) {                            
                     ?>
-
                     <li>
                         <a href="import_master.php">Import Master</a>
                     </li>
@@ -258,14 +236,16 @@
         </li>
     </ul>
 </li>
-<li>
-    <a href="#"><i class="fa fa-truck-moving fa-fw"></i> Trucker<span class="fa arrow"></span></a>
+<li class="<?= $uriSegments[2] == 'truck_confirm_job.php' || $uriSegments[2] == 'truck_job_confirmed.php' ? 'active' : '' ?>">
+    <a class="<?= $uriSegments[2] == 'truck_confirm_job.php' || $uriSegments[2] == 'truck_job_confirmed.php' ? 'active' : '' ?>" href="#"><i class="fa fa-truck-moving fa-fw"></i> Trucker<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
-        <li>
-            <a class="#" href="truck_confirm_job.php?ref=0000000.php"><i class="#"></i>Confirm Job</a>
+        <li class="<?= $uriSegments[2] == 'truck_confirm_job.php' ? 'show' : '' ?>">
+            <!-- <a class="#" href="truck_confirm_job.php?ref=0000000.php"><i class="#"></i>Confirm Job</a> -->
+            <a class="#" href="truck_confirm_job.php"><i class="#"></i><i class="fas fa-caret-right" aria-hidden="true"></i> Confirm Job</a>
         </li>
-        <li>
-            <a class="#" href="truck_job_confirmed.php?ref=0000000.php"><i class="#"></i>Job List</a>
+        <li class="<?= $uriSegments[2] == 'truck_job_confirmed.php' ? 'show' : '' ?>">
+            <!-- <a class="#" href="truck_job_confirmed.php?ref=0000000.php"><i class="#"></i>Job List</a> -->
+            <a class="#" href="truck_job_confirmed.php"><i class="#"></i><i class="fas fa-caret-right" aria-hidden="true"></i> Job List</a>
         </li>                                             
     </ul>
 </li>
