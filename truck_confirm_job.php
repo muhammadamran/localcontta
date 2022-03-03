@@ -324,10 +324,10 @@ if(isset($_GET['findthree']))
                     <th class="no-sort">#</th>
                     <th class="no-sort" style="text-align: center;">ID</th>
                     <th class="no-sort" style="text-align: center;">Number</th>
-                    <th class="no-sort" style="text-align: center;">Assign</th>
                     <th style="text-align: center;">Vendor</th>
                     <th class="no-sort" style="text-align: center;">Address/Dest.</th>  
                     <th class="no-sort" style="text-align: center;">Details</th>
+                    <th class="no-sort" style="text-align: center;">Assign</th>
                     <th style="text-align: center;">Action</th> 
                   </tr>
                 </thead>
@@ -376,11 +376,6 @@ if(isset($_GET['findthree']))
                            <br>
                            <font><b>HBL: </b>" . $inv['rcd_hbl'] . "</font>
                            </td>";
-                      echo "<td>
-                           <font><b>Date: </b>" . $row['assign_date'] . "</font>
-                           <br>
-                           <font><b>By: </b>" . $row['assign_by'] . "</font>
-                           </td>";
                       echo "<td>" . $row['assign_vendor'] . "</td>";
                       echo "<td style='text-align: center'>
                             <a href='#' data-toggle='modal' data-target='#address$row[rcd_id]' title='Address/Destination'>
@@ -398,7 +393,12 @@ if(isset($_GET['findthree']))
                            <br>
                            <font><b>Weight: </b>" . $inv['rcd_weight'] . "</font>
                            </td>";
-                      echo "<td align= ''>
+                      echo "<td>
+                           <font><b>Date: </b>" . $row['assign_date'] . "</font>
+                           <br>
+                           <font><b>By: </b>" . $row['assign_by'] . "</font>
+                           </td>";
+                      echo "<td style='text-align: center'>
                         <a href='#' data-toggle='modal' data-target='#update$row[rcd_id]' title='Update Record'><span class='btn btn-sm btn-warning'><i class='fas fa-pencil'></i></span></a>
                         <a href='#' data-toggle='modal' data-target='#confirm$row[rcd_id]' title='Confirm Record'><span class='btn btn-sm btn-success'><i class='fas fa-check-circle'></i></span></a>
                         <a href='#' data-toggle='modal' data-target='#reject$row[rcd_id]' title='Reject Record'><span class='btn btn-sm btn-danger'><i class='fas fa-ban'></i></span></a>

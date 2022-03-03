@@ -72,6 +72,13 @@
 				"orderable": false,
 			}]
 		});
+		$('#TruckConfirmed').DataTable({
+			"order": [],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}]
+		});
 		$('#users').DataTable({
 			"order": [],
 			"columnDefs": [{
