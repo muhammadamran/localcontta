@@ -34,9 +34,9 @@ $access = mysql_fetch_array($role);
             <span class="clock-ct">-</span>
         </li>
         <li>
-            <span class="role-show">Role : <?= $access['user_role'] . " | Scope : " . $access['user_scope'] . " | Dept : " . $access['user_dept'];?></span>
+            <span class="role-show">Role : <?= $access['user_role'] . " | Branch : " . $access['user_branches'] . " | Scope : " . $access['user_scope'] . " | Dept : " . $access['user_dept'];?></span>
         </li>
-        <li class="dropdown notify">
+        <!-- <li class="dropdown notify">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell fa-fw icon-white"></i>  <i class="fa fa-caret-down icon-white"></i>
             </a>
@@ -93,7 +93,7 @@ $access = mysql_fetch_array($role);
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> -->
         <li class="dropdown user">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw icon-white"></i>

@@ -7,7 +7,7 @@ include "include/datatables.php";
 $con=mysqli_connect("localhost","root","","contta");
 if (mysqli_connect_errno())
 {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 $uid    = $_GET['user_id'];
 $result = mysqli_query($con,"SELECT * FROM tb_user WHERE user_id ='$uid'");
@@ -17,92 +17,102 @@ $row = mysqli_fetch_array($result);
 if(isset($_POST["edit"]))    
 {    
   // Admin
-  $cekRole =  $_POST['user_role_edit'];
-  if ($cekRole == 'admin') {
-    $email                = $_POST['admin_user_mail_edit'];
-    $role                 = $_POST['user_role_edit'];
-    $scope                = $_POST['admin_scope_edit'];
-    $department           = $_POST['admin_dept_edit'];
+	$cekRole =  $_POST['user_role_edit'];
+	if ($cekRole == 'admin') {
+		$email                = $_POST['admin_user_mail_edit'];
+		$role                 = $_POST['user_role_edit'];
+		$scope                = $_POST['admin_scope_edit'];
+		$department           = $_POST['admin_dept_edit'];
+		$user_branches        = $_POST['user_branches'];
 
-    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
-    										 user_role='$role',
-    										 user_scope='$scope',
-    										 user_dept='$department'
-    										 WHERE user_id='$uid'");
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                         
-    } else {
-      header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
-    }
+		$query = mysql_query("UPDATE tb_user SET user_mail='$email',
+			user_role='$role',
+			user_scope='$scope',
+			user_dept='$department',
+			user_branches='$user_branches'
+			WHERE user_id='$uid'");
+		if($query) {
+			header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                         
+		} else {
+			header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
+		}
   // General Manager
-  } else if ($cekRole == 'gm') {
-    $email                = $_POST['gm_user_mail_edit'];
-    $role                 = $_POST['user_role_edit'];
-    $scope                = $_POST['gm_scope_edit'];
-    $department           = $_POST['gm_dept_edit'];
+	} else if ($cekRole == 'gm') {
+		$email                = $_POST['gm_user_mail_edit'];
+		$role                 = $_POST['user_role_edit'];
+		$scope                = $_POST['gm_scope_edit'];
+		$department           = $_POST['gm_dept_edit'];
+		$user_branches        = $_POST['user_branches'];
 
-    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
-    										 user_role='$role',
-    										 user_scope='$scope',
-    										 user_dept='$department'
-    										 WHERE user_id='$uid'");
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                
-    } else {
-      header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
-    }
+		$query = mysql_query("UPDATE tb_user SET user_mail='$email',
+			user_role='$role',
+			user_scope='$scope',
+			user_dept='$department',
+			user_branches='$user_branches'
+			WHERE user_id='$uid'");
+		if($query) {
+			header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                
+		} else {
+			header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
+		}
   // Manager
-  } else if ($cekRole == 'manager') {
-    $email                = $_POST['manager_user_mail_edit'];
-    $role                 = $_POST['user_role_edit'];
-    $scope                = $_POST['manager_scope_edit'];
-    $department           = $_POST['manager_dept_edit'];
+	} else if ($cekRole == 'manager') {
+		$email                = $_POST['manager_user_mail_edit'];
+		$role                 = $_POST['user_role_edit'];
+		$scope                = $_POST['manager_scope_edit'];
+		$department           = $_POST['manager_dept_edit'];
+		$user_branches        = $_POST['user_branches'];
 
-    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
-    										 user_role='$role',
-    										 user_scope='$scope',
-    										 user_dept='$department'
-    										 WHERE user_id='$uid'");
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                            
-    } else {
-      header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
-    }
+		$query = mysql_query("UPDATE tb_user SET user_mail='$email',
+			user_role='$role',
+			user_scope='$scope',
+			user_dept='$department',
+			user_branches='$user_branches'
+			WHERE user_id='$uid'");
+		if($query) {
+			header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                            
+		} else {
+			header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
+		}
   // User
-  } else if ($cekRole == 'user') {
-    $email                = $_POST['user_user_mail_edit'];
-    $role                 = $_POST['user_role_edit'];
-    $scope                = $_POST['user_scope_edit'];
-    $department           = $_POST['user_dept_edit'];
+	} else if ($cekRole == 'user') {
+		$email                = $_POST['user_user_mail_edit'];
+		$role                 = $_POST['user_role_edit'];
+		$scope                = $_POST['user_scope_edit'];
+		$department           = $_POST['user_dept_edit'];
+		$user_branches        = $_POST['user_branches'];
 
-    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
-    										 user_role='$role',
-    										 user_scope='$scope',
-    										 user_dept='$department'
-    										 WHERE user_id='$uid'");
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                      
-    } else {
-      header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
-    }
+		$query = mysql_query("UPDATE tb_user SET user_mail='$email',
+			user_role='$role',
+			user_scope='$scope',
+			user_dept='$department',
+			user_branches='$user_branches'
+			WHERE user_id='$uid'");
+		if($query) {
+			header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                      
+		} else {
+			header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
+		}
   // Guest
-  } else if ($cekRole == 'guest') {
-    $email                = $_POST['guest_user_mail_edit'];
-    $role                 = $_POST['user_role_edit'];
-    $scope                = $_POST['guest_scope_edit'];
-    $department           = $_POST['guest_dept_edit'];
+	} else if ($cekRole == 'guest') {
+		$email                = $_POST['guest_user_mail_edit'];
+		$role                 = $_POST['user_role_edit'];
+		$scope                = $_POST['guest_scope_edit'];
+		$department           = $_POST['guest_dept_edit'];
+		$user_branches        = $_POST['user_branches'];
 
-    $query = mysql_query("UPDATE tb_user SET user_mail='$email',
-    										 user_role='$role',
-    										 user_scope='$scope',
-    										 user_dept='$department'
-    										 WHERE user_id='$uid'");
-    if($query) {
-      header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                              
-    } else {
-      header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
-    }
-  }
+		$query = mysql_query("UPDATE tb_user SET user_mail='$email',
+			user_role='$role',
+			user_scope='$scope',
+			user_dept='$department',
+			user_branches='$user_branches'
+			WHERE user_id='$uid'");
+		if($query) {
+			header("Location: ./iou_adm_user.php?UpdateSuccess=true");                                              
+		} else {
+			header("Location: ./iou_adm_user.php?UpdateFailed=true");                                                  
+		}
+	}
 }
 ?>
 <?php include 'include/head.php';?>
@@ -145,6 +155,19 @@ if(isset($_POST["edit"]))
 										<div class="form-group">
 											<label>Current Role</label>
 											<input type="text" name="cur_role" class="form-control" value="<?=$row['user_role'];?>"  readonly>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Current Branch</label>
+											<select class="form-control" name="user_branches">
+												<option value="<?=$row['user_branches'];?>"><?=$row['user_branches'];?></option>
+												<option value="">-- Select Branch --</option>
+												<option value="JKT">JKT</option>
+												<option value="CGK">CGK</option>
+												<option value="SUB">SUB</option>
+												<option value="CHB">CHB</option>
+											</select>
 										</div>
 									</div>
 								</div>
