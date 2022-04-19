@@ -140,13 +140,13 @@ if(isset($_POST['chk_id']))
     <!-- Page -->
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">
-          <i class="fa fa-folder-open icon-title"></i> Report - Daily Report
-        </h1>
+        <h3 class="page-header">
+          <i class="fa fa-folder-open icon-title"></i> Report - Sea - Import Record - Customers Record
+        </h3>
         <nav aria-label="breadcrumb" role="navigation">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Daily Report - Import</li>
+            <li class="breadcrumb-item active" aria-current="page">Siemens</li>
           </ol>
         </nav>
       </div>

@@ -146,7 +146,7 @@ if(isset($_POST['chk_id']))
         <nav aria-label="breadcrumb" role="navigation">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Daily Report - Import</li>
+            <li class="breadcrumb-item active" aria-current="page">Daily Report - Export</li>
           </ol>
         </nav>
       </div>

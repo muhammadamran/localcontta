@@ -141,12 +141,12 @@ if(isset($_POST['chk_id']))
     <div class="row">
       <div class="col-lg-12">
         <h1 class="page-header">
-          <i class="fa fa-folder-open icon-title"></i> Report - Daily Report
+          <i class="fa fa-folder-open icon-title"></i> Report - Sea - Import Record
         </h1>
         <nav aria-label="breadcrumb" role="navigation">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Daily Report - Import</li>
+            <li class="breadcrumb-item active" aria-current="page">Uncompleted Record</li>
           </ol>
         </nav>
       </div>

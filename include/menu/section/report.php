@@ -3,45 +3,86 @@
         REPORT SECTION
     </div>
 </li>
-<li>
-    <a href="#"><i class="fa fa-folder-open fa-fw"></i> Report<span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level">                           
-        <li>
+<li class="<?= // EXPORT | IMPORT
+               $uriSegments[2] == 'report_daily_export.php' || 
+               $uriSegments[2] == 'report_daily_import.php' || 
+               // AIR
+               $uriSegments[2] == 'report_air_process.php' || 
+               $uriSegments[2] == 'report_air_uncompleted.php' ||
+               // SEA
+               $uriSegments[2] == 'report_sea_process.php' ||
+               $uriSegments[2] == 'report_sea_uncompleted.php' ||
+               // CUSTOMER 
+               $uriSegments[2] == 'report_sea_cust_siemens.php'
+               ? 'active' : ''
+            ?>">
+    <a class="<?= // EXPORT | IMPORT
+                  $uriSegments[2] == 'report_daily_export.php' || 
+                  $uriSegments[2] == 'report_daily_import.php' || 
+                  // AIR
+                  $uriSegments[2] == 'report_air_process.php' || 
+                  $uriSegments[2] == 'report_air_uncompleted.php' ||
+                  // SEA
+                  $uriSegments[2] == 'report_sea_process.php' ||
+                  $uriSegments[2] == 'report_sea_uncompleted.php' ||
+                  // CUSTOMER 
+                  $uriSegments[2] == 'report_sea_cust_siemens.php'
+                  ? 'active' : ''
+              ?>" href="#"><i class="fa fa-folder-open fa-fw"></i> Report<span class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level">
+        <!-- DAILY REPORT -->
+        <li class="<?= $uriSegments[2] == 'report_daily_export.php' ||  
+                       $uriSegments[2] == 'report_daily_import.php'
+                       ? 'active' : '' 
+                   ?>">
             <a href="#" style="background-color: skyblue;color: white"><i class="fas fa-calendar-check"></i> Daily Report<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-                <li>
-                    <a href="import_daily_report.php?datenow=<?= date('Y-m-d');?>"><i class="fas fa-caret-right" aria-hidden="true"></i> Daily Report - Import</a>
+                <li class="<?= $uriSegments[2] == 'report_daily_export.php' ? 'show' : '' ?>">
+                    <a href="report_daily_export.php?datenow=<?= date('Y-m-d');?>"><font style="font-weight: 600;">-</font> Daily Report - Export</a>
                 </li>
-                <li>
-                    <a href="export_daily_report.php?datenow=<?= date('Y-m-d');?>"><i class="fas fa-caret-right" aria-hidden="true"></i> Daily Report - Export</a>
+                <li class="<?= $uriSegments[2] == 'report_daily_import.php' ? 'show' : '' ?>">
+                    <a href="report_daily_import.php?datenow=<?= date('Y-m-d');?>"><font style="font-weight: 600;">-</font> Daily Report - Import</a>
                 </li>
             </ul>
         </li>
-        <li>
+        <!-- AIR -->
+        <li class="<?= $uriSegments[2] == 'report_air_process.php' ||  
+                       $uriSegments[2] == 'report_air_uncompleted.php'
+                       ? 'active' : '' 
+                   ?>">
             <a href="#" style="background-color: skyblue;color: white"><i class="fas fa-plane"></i> Air - Import Record<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-                <li>
-                    <a href="air_import_report_process.php?month=0&year=0"><i class="fas fa-caret-right" aria-hidden="true"></i> Report Process</a>
+                <li class="<?= $uriSegments[2] == 'report_air_process.php' ? 'show' : '' ?>">
+                    <a href="report_air_process.php"><font style="font-weight: 600;">-</font> Report Process</a>
                 </li>
-                <li>
-                    <a href="air_import_uncompleted_record.php"><i class="fas fa-caret-right" aria-hidden="true"></i> Uncompleted Record</a>
+                <li class="<?= $uriSegments[2] == 'report_air_uncompleted.php' ? 'show' : '' ?>">
+                    <a href="report_air_uncompleted.php"><font style="font-weight: 600;">-</font> Uncompleted Record</a>
                 </li>
             </ul>
         </li>
-        <li>
+        <!-- SEA -->
+        <li class="<?= $uriSegments[2] == 'report_sea_process.php' ||  
+                       $uriSegments[2] == 'report_sea_uncompleted.php' ||
+                       $uriSegments[2] == 'report_sea_cust_siemens.php' 
+                       ? 'active' : '' 
+                   ?>">
             <a href="#" style="background-color: skyblue;color: white"><i class="fas fa-ship"></i> Sea - Import Record<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-                <li>
-                    <a href="import_report_process.php?month=0&year=0"><i class="fas fa-caret-right" aria-hidden="true"></i> Report Process</a>
+                <li class="<?= $uriSegments[2] == 'report_sea_process.php' ? 'show' : '' ?>">
+                    <a href="report_sea_process.php"><font style="font-weight: 600;">-</font> Report Process</a>
                 </li>
-                <li>
-                    <a href="import_uncompleted_record.php"><i class="fas fa-caret-right" aria-hidden="true"></i> Uncompleted Record</a>
+                <li class="<?= $uriSegments[2] == 'report_sea_uncompleted.php' ? 'show' : '' ?>">
+                    <a href="report_sea_uncompleted.php"><font style="font-weight: 600;">-</font> Uncompleted Record</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fas fa-caret-right" aria-hidden="true"></i> Customer Report<span class="fa arrow"></span></a>
+                <!-- CUSTOMER -->
+                <li class="<?= $uriSegments[2] == 'report_sea_cust_siemens.php'
+                       ? 'active' : '' 
+                   ?>">
+                    <a href="#" style="background-color: #5bc0de;color: white"><i class="fas fa-sitemap"></i> Customer Report<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a href="report_cust_siemens.php?month=0&year=0"></i> Siemens</a>
+                        <li class="<?= $uriSegments[2] == 'report_sea_cust_siemens.php' ? 'show' : '' ?>">
+                            <a href="report_sea_cust_siemens.php">&nbsp;&nbsp;&nbsp;&nbsp; <font style="font-weight: 600;">-</font> Siemens</a>
                         </li>
                     </ul>
                 </li>
