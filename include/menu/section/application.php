@@ -70,7 +70,7 @@
                     <a class="#" href="export_air_ship_mon.php"><font style="font-weight: 600;">-</font> 2) Ship. Monitoring</a>
                 </li>   
                 <li class="<?= $uriSegments[2] == 'export_air_efile.php' ? 'show' : '' ?>">
-                    <a class="#" href="export_air_efile.php?ref=##"><font style="font-weight: 600;">-</font> *) E-FILE</a>
+                    <a class="#" href="export_air_efile.php"><font style="font-weight: 600;">-</font> *) E-FILE</a>
                 </li>                             
             </ul>
         </li>
@@ -121,7 +121,7 @@
                     <a class="#" href="export_sea_set_trucker.php"><font style="font-weight: 600;">-</font> 5) Set Trucker</a>
                 </li> 
                 <li class="<?= $uriSegments[2] == 'export_sea_efile.php' ? 'show' : '' ?>">
-                    <a class="#" href="export_sea_efile.php?ref=##"><font style="font-weight: 600;">-</font> *) E-FILE</a>
+                    <a class="#" href="export_sea_efile.php"><font style="font-weight: 600;">-</font> *) E-FILE</a>
                 </li>                             
             </ul>
         </li>
@@ -136,8 +136,15 @@
                $uriSegments[2] == 'import_air_post.php' || 
                $uriSegments[2] == 'import_air_set_trucking.php' || 
                $uriSegments[2] == 'import_air_cost_sheet.php' || 
-               $uriSegments[2] == 'import_air_efile.php'
+               $uriSegments[2] == 'import_air_efile.php' || 
                // IMPORT SEA
+               $uriSegments[2] == 'import_sea_master.php' || 
+               $uriSegments[2] == 'import_sea_pre.php' || 
+               $uriSegments[2] == 'import_sea_clear.php' || 
+               $uriSegments[2] == 'import_sea_post.php' || 
+               $uriSegments[2] == 'import_sea_set_trucking.php' || 
+               $uriSegments[2] == 'import_sea_cost_sheet.php' || 
+               $uriSegments[2] == 'import_sea_efile.php'
                ? 'active' : '' 
            ?>">
     <a class="<?= // IMPORT AIR
@@ -147,8 +154,15 @@
                   $uriSegments[2] == 'import_air_post.php' || 
                   $uriSegments[2] == 'import_air_set_trucking.php' || 
                   $uriSegments[2] == 'import_air_cost_sheet.php' || 
-                  $uriSegments[2] == 'import_air_efile.php'
+                  $uriSegments[2] == 'import_air_efile.php' || 
                   // IMPORT SEA
+                  $uriSegments[2] == 'import_sea_master.php' || 
+                  $uriSegments[2] == 'import_sea_pre.php' || 
+                  $uriSegments[2] == 'import_sea_clear.php' || 
+                  $uriSegments[2] == 'import_sea_post.php' || 
+                  $uriSegments[2] == 'import_sea_set_trucking.php' || 
+                  $uriSegments[2] == 'import_sea_cost_sheet.php' || 
+                  $uriSegments[2] == 'import_sea_efile.php'
                   ? 'active' : '' 
               ?>" href="#"><i class="fa fa-dolly-flatbed fa-fw"></i> Import<span class="fa arrow"></span>
     </a>
@@ -235,19 +249,27 @@
                     </li>
                 <?php } ?>
                 <li class="<?= $uriSegments[2] == 'import_air_set_trucking.php' ? 'show' : '' ?>">
-                    <a class="#" href="import_air_set_trucking.php?ref=##"><font style="font-weight: 600;">-</font> 4) Set Trucking</a>
+                    <a class="#" href="import_air_set_trucking.php"><font style="font-weight: 600;">-</font> 4) Set Trucking</a>
                 </li>
                 <li class="<?= $uriSegments[2] == 'import_air_cost_sheet.php' ? 'show' : '' ?>">
-                    <a class="#" href="import_air_cost_sheet.php?hbl=##"><font style="font-weight: 600;">-</font> *) Cost Sheet</a>
+                    <a class="#" href="import_air_cost_sheet.php"><font style="font-weight: 600;">-</font> *) Cost Sheet</a>
                 </li>
                 <li class="<?= $uriSegments[2] == 'import_air_efile.php' ? 'show' : '' ?>">
-                    <a class="#" href="import_air_efile.php?hbl=##"><font style="font-weight: 600;">-</font> *) E-FILE</a>
+                    <a class="#" href="import_air_efile.php"><font style="font-weight: 600;">-</font> *) E-FILE</a>
                 </li>
             </ul>
         </li>
         <!-- END IMPORT AIRFREGIT -->
         <!-- IMPORT SEAFREIGHT -->
-        <li>
+        <li class="<?= $uriSegments[2] == 'import_sea_master.php' || 
+                       $uriSegments[2] == 'import_sea_pre.php' || 
+                       $uriSegments[2] == 'import_sea_clear.php' || 
+                       $uriSegments[2] == 'import_sea_post.php' || 
+                       $uriSegments[2] == 'import_sea_set_trucking.php' || 
+                       $uriSegments[2] == 'import_sea_cost_sheet.php' || 
+                       $uriSegments[2] == 'import_sea_efile.php'
+                       ? 'active' : '' 
+                   ?>">
             <a href="#" style="background-color: skyblue;color: white"><i class="fas fa-ship"></i> Seafreight<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
                 <?php 
@@ -258,12 +280,12 @@
                 $total1 = mysqli_num_rows($result1);
                 if ($total1 == 0) {                            
                     ?>
-                    <li>
-                        <a href="import_master.php"><font style="font-weight: 600;">-</font> Import Master</a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_master.php' ? 'show' : '' ?>">
+                        <a href="import_sea_master.php"><font style="font-weight: 600;">-</font> Import Master</a>
                     </li>
                 <?php } else { ?>
-                    <li>
-                        <a class="#" href="import_master.php"><font style="font-weight: 600;">-</font> Import Master <i class="btn btn-primary btn-circle"><?= $total1;?></i></a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_master.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_master.php"><font style="font-weight: 600;">-</font> Import Master <i class="btn btn-primary btn-circle"><?= $total1;?></i></a>
                     </li>
                 <?php } ?>
                 <?php 
@@ -275,12 +297,12 @@
                 $total2 = mysqli_num_rows($result2);
                 if ($total2 == 0) {                            
                     ?>
-                    <li>
-                        <a class="#" href="imp_pre.php"><font style="font-weight: 600;">-</font> 1) Pre-Clearance</a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_pre.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_pre.php"><font style="font-weight: 600;">-</font> 1) Pre-Clearance</a>
                     </li>
                 <?php } else { ?>
-                    <li>
-                        <a class="#" href="imp_pre.php"><font style="font-weight: 600;">-</font> 1) Pre-Clearance <i class="btn btn-primary btn-circle"><?= $total2;?></i></a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_pre.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_pre.php"><font style="font-weight: 600;">-</font> 1) Pre-Clearance <i class="btn btn-primary btn-circle"><?= $total2;?></i></a>
                     </li>
                 <?php } ?>
                 <?php 
@@ -293,12 +315,12 @@
                 $total3 = mysqli_num_rows($result3);
                 if ($total3 == 0) {                            
                     ?>
-                    <li>
-                        <a class="#" href="imp_clear.php"><font style="font-weight: 600;">-</font> 2) Clearance</a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_clear.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_clear.php"><font style="font-weight: 600;">-</font> 2) Clearance</a>
                     </li>
                 <?php } else { ?>
-                    <li>
-                        <a class="#" href="imp_clear.php"><font style="font-weight: 600;">-</font> 2) Clearance <i class="btn btn-primary btn-circle"><?= $total3;?></i></a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_clear.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_clear.php"><font style="font-weight: 600;">-</font> 2) Clearance <i class="btn btn-primary btn-circle"><?= $total3;?></i></a>
                     </li>
                 <?php } ?>
                 <?php 
@@ -311,22 +333,22 @@
                 $total4 = mysqli_num_rows($result4);
                 if ($total4 == 0) {                            
                     ?>
-                    <li>
-                        <a class="#" href="imp_post.php"><font style="font-weight: 600;">-</font> 3) Post-Clearance</a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_post.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_post.php"><font style="font-weight: 600;">-</font> 3) Post-Clearance</a>
                     </li>
                 <?php } else { ?>
-                    <li>
-                        <a class="#" href="imp_post.php"><font style="font-weight: 600;">-</font> 3) Post-Clearance <i class="btn btn-primary btn-circle"><?= $total4;?></i></a>
+                    <li class="<?= $uriSegments[2] == 'import_sea_post.php' ? 'show' : '' ?>">
+                        <a class="#" href="import_sea_post.php"><font style="font-weight: 600;">-</font> 3) Post-Clearance <i class="btn btn-primary btn-circle"><?= $total4;?></i></a>
                     </li>
                 <?php } ?>
-                <li>
-                    <a class="#" href="import_set_trucking.php?ref=##"><font style="font-weight: 600;">-</font> 4) Set Trucking</a>
+                <li class="<?= $uriSegments[2] == 'import_sea_set_trucking.php' ? 'show' : '' ?>">
+                    <a class="#" href="import_sea_set_trucking.php"><font style="font-weight: 600;">-</font> 4) Set Trucking</a>
                 </li>
-                <li>
-                    <a class="#" href="imp_cost_sheet?hbl=##"><font style="font-weight: 600;">-</font> *) Cost Sheet</a>
+                <li class="<?= $uriSegments[2] == 'import_sea_cost_sheet.php' ? 'show' : '' ?>">
+                    <a class="#" href="import_sea_cost_sheet.php"><font style="font-weight: 600;">-</font> *) Cost Sheet</a>
                 </li>
-                <li>
-                    <a class="#" href="imp_efile.php?hbl=##"><font style="font-weight: 600;">-</font> *) E-FILE</a>
+                <li class="<?= $uriSegments[2] == 'import_sea_efile.php' ? 'show' : '' ?>">
+                    <a class="#" href="import_sea_efile.php"><font style="font-weight: 600;">-</font> *) E-FILE</a>
                 </li>
             </ul>
         </li>
@@ -334,21 +356,21 @@
     </ul>
 </li>
 <!-- TRUCKER -->
-<li class="<?= $uriSegments[2] == 'truck_confirm_job.php' || 
-               $uriSegments[2] == 'truck_job_confirmed.php' 
+<li class="<?= $uriSegments[2] == 'truck_job_confirm.php' || 
+               $uriSegments[2] == 'truck_job_list.php' 
                ? 'active' : '' 
            ?>">
-    <a class="<?= $uriSegments[2] == 'truck_confirm_job.php' || 
-                  $uriSegments[2] == 'truck_job_confirmed.php' 
+    <a class="<?= $uriSegments[2] == 'truck_job_confirm.php' || 
+                  $uriSegments[2] == 'truck_job_list.php' 
                   ? 'active' : '' 
               ?>" href="#"><i class="fa fa-truck-moving fa-fw"></i> Trucker<span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level">
-        <li class="<?= $uriSegments[2] == 'truck_confirm_job.php' ? 'show' : '' ?>">
-            <a class="#" href="truck_confirm_job.php"><i class="#"></i><i class="fas fa-caret-right" aria-hidden="true"></i> Confirm Job</a>
+        <li class="<?= $uriSegments[2] == 'truck_job_list.php' ? 'show' : '' ?>">
+            <a class="#" href="truck_job_list.php"><i class="#"></i><i class="fas fa-caret-right" aria-hidden="true"></i> Job List</a>
         </li>
-        <li class="<?= $uriSegments[2] == 'truck_job_confirmed.php' ? 'show' : '' ?>">
-            <a class="#" href="truck_job_confirmed.php"><i class="#"></i><i class="fas fa-caret-right" aria-hidden="true"></i> Job List</a>
+        <li class="<?= $uriSegments[2] == 'truck_job_confirm.php' ? 'show' : '' ?>">
+            <a class="#" href="truck_job_confirm.php"><i class="#"></i><i class="fas fa-caret-right" aria-hidden="true"></i> Job Confirm</a>
         </li>                                             
     </ul>
 </li>

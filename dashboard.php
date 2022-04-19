@@ -2,7 +2,7 @@
 <?php
 include 'include/restrict.php';
 include 'include/head.php';
-include "include/datatables.php";
+include 'include/datatables.php';
 ?>
 <!-- Main Page -->
 <div id="wrapper">

@@ -10,10 +10,10 @@
             <a href="#" style="background-color: skyblue;color: white"><i class="fas fa-calendar-check"></i> Daily Report<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
                 <li>
-                    <a href="import_daily_report.php?datenow=<?php echo date('Y-m-d');?>"><i class="fas fa-caret-right" aria-hidden="true"></i> Daily Report - Import</a>
+                    <a href="import_daily_report.php?datenow=<?= date('Y-m-d');?>"><i class="fas fa-caret-right" aria-hidden="true"></i> Daily Report - Import</a>
                 </li>
                 <li>
-                    <a href="export_daily_report.php?datenow=<?php echo date('Y-m-d');?>"><i class="fas fa-caret-right" aria-hidden="true"></i> Daily Report - Export</a>
+                    <a href="export_daily_report.php?datenow=<?= date('Y-m-d');?>"><i class="fas fa-caret-right" aria-hidden="true"></i> Daily Report - Export</a>
                 </li>
             </ul>
         </li>

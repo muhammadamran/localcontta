@@ -8,6 +8,7 @@ $access = mysql_fetch_array($role);
 // var_dump($access);exit;
 
 // user_role = 1.admin; 2.guest; 3.user;
+// user_brances = 1.JKT; 2.CGK; 3.SUB;
 // user_scope = 1.all; 2.import; 3.export;
 // user_dept = 1.all; 2.sea; 3.air;
 ?>
@@ -21,7 +22,6 @@ $access = mysql_fetch_array($role);
         </button>
         <a class="navbar-brand" href="index.php">
             <div class="text-logo">
-                <!-- <img src="assets/images/logo/logo.svg">&nbsp; -->
                 <font class="font-logo-first">Local</font><font class="font-logo-second">contta</font>
             </div>
         </a>
@@ -36,64 +36,6 @@ $access = mysql_fetch_array($role);
         <li>
             <span class="role-show">Role : <?= $access['user_role'] . " | Branch : " . $access['user_branches'] . " | Scope : " . $access['user_scope'] . " | Dept : " . $access['user_dept'];?></span>
         </li>
-        <!-- <li class="dropdown notify">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-bell fa-fw icon-white"></i>  <i class="fa fa-caret-down icon-white"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-alerts">
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                            <span class="pull-right text-muted small">12 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-envelope fa-fw"></i> Message Sent
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-tasks fa-fw"></i> New Task
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="#">
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-        </li> -->
         <li class="dropdown user">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw icon-white"></i>
@@ -117,21 +59,6 @@ $access = mysql_fetch_array($role);
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <!-- <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </li> -->
-                <!-- <li style="background: #26c5e6">
-                    <a href="http://kn-idcore.ap.win.int.kn/" target="_blank"><i class="fa fa-globe fa-fw" style="color: #fff;"></i> 
-                        <font style="color: #fff;font-weight: 700;">KN-IDCORE</font>
-                    </a>
-                </li> -->
                 <li class="section">
                     <div>
                         GENERAL SECTION
@@ -181,7 +108,6 @@ $access = mysql_fetch_array($role);
                 { 
                     include 'menu/user/sea/sidebar.php';
                 } 
-
 
                 // Guest
                 /*User*/

@@ -1,631 +1,531 @@
+<script src="assets/js/jquery.min.js"></script> 
 <?php
-
 include "include/connection.php";
 include "include/restrict.php";
+include "include/datatables.php";
 
-if(isset($_POST["create"]))    
+// Confrim
+if(isset($_POST["confirmss"]))    
 {    
 
-  $ship_plan            = $_POST['ship_plan'];
-  $shipper              = $_POST['shipper'];
-  $cnee                 = $_POST['cnee'];
-  $inv_no               = $_POST['inv_no'];
-  $commo                = $_POST['commo'];
-  $c20                  = $_POST['c20'];
-  $c40                  = $_POST['c40'];
-  $party                = $_POST['party'];
-  $po_no                = $_POST['po_no'];
-  $rcd_type             = "export";
-  $user_name            = $_POST['user_name'];
-  $datenow              = date('Y-m-d H:i:s');
+$rcd_id         = $_POST['rcd_id'];
+$user_name      = $_POST['user_name'];
+$datenow        = date('Y-m-d');
+$truck_job_id   = $_POST['truck_job_id'];
+$c20            = $_POST['c20'];
+$c40            = $_POST['c40'];
 
-  $query = mysql_query("INSERT into tb_record_master values(' ','$datenow','$user_name','$rcd_type','$ship_plan','$shipper','$cnee','$inv_no','$commo','$c20','$c40','$party','$po_no')");
-  if($query){
-    header("Location: ./export_master.php");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
+  $query = mysql_query("UPDATE tb_truck_assign SET order_rcvd_by='$user_name', order_rcvd_date='$datenow' where rcd_id='$rcd_id' ");
+
+  /* START -  GET DATA FROM MASTER RECORD */
+  mysql_connect('localhost','root','');
+  mysql_select_db('contta'); 
+  $get_master = mysql_query("SELECT * FROM tb_record_master WHERE rcd_id = '$rcd_id' ");
+  $getmas = mysql_fetch_array($get_master);
+  /* END - GET DATA FROM MASTER RECORD */
+
+  if ($query) {
+    $x = 1;
+    $c20 = $c20;
+    while($x <= $c20) {
+      mysql_query("INSERT into tb_truck_job_details(cont_type,truck_job_id,rcd_id) values('20','$truck_job_id','$rcd_id')");
+      $x++;
+    } 
+    if ($c40 != 0) {
+      $z = 1;
+      $c40 = $c40;
+      while($z <= $c40) {
+      mysql_query("INSERT into tb_truck_job_details(cont_type,truck_job_id,rcd_id) values('40','$truck_job_id','$rcd_id')");
+      $z++;
+      } 
+      header("Location: ./truck_job_confirmed.php?notif=no40"); 
+    } else {
+      header("Location: ./truck_job_confirmed.php?notif=no40"); 
+    }
   }
 }
 
-if(isset($_POST["update"]))    
-{    
 
-  $booking_code         = $_POST['booking_code'];
-  $tract_driver_name    = $_POST['tract_driver_name'];
-  $tract_driver_phone   = $_POST['tract_driver_phone'];
-  $tract_vehicle_no     = $_POST['tract_vehicle_no'];
-  $tract_cont_no        = $_POST['tract_cont_no'];
-  $tract_id             = $_POST['tract_id'];
-  $seal_no              = $_POST['seal_no'];
-  $cont_tear            = $_POST['cont_tear'];
-  $stuffarea            = $_POST['stuffarea'];
-  $rcd_id               = $_POST['rcd_id'];
-
-  $query = mysql_query("UPDATE tb_truck_job_details SET booking_code = '$booking_code' , tract_driver_name='$tract_driver_name', tract_driver_phone='$tract_driver_phone' , tract_vehicle_no = '$tract_vehicle_no' , tract_cont_no = '$tract_cont_no' , seal_no = '$seal_no' , cont_tear = '$cont_tear' , stuffarea = '$stuffarea' where tract_id='$tract_id' ");
-
-  if($query){
-    header("Location: ./truck_job_list.php?rcd_id=$rcd_id&dt=$tract_cont_no");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
-  }
-}
-
-if(isset($_POST["act_update"]))    
-{    
-
-  $tract_start          = $_POST['tract_start'];
-  $tract_arr_in_wh      = $_POST['tract_arr_in_wh'];
-  $tract_start_stuff    = $_POST['tract_start_stuff'];
-  $tract_end_stuff      = $_POST['tract_end_stuff'];
-  $tract_leave_wh       = $_POST['tract_leave_wh'];
-  $tract_id             = $_POST['tract_id'];
-  $rcd_id               = $_POST['rcd_id'];
-  $tract_arr_in_dest    = $_POST['tract_arr_in_dest'];
-
-  $query = mysql_query("UPDATE tb_truck_job_details SET tract_start = '$tract_start' , tract_arr_in_wh='$tract_arr_in_wh', tract_start_stuff='$tract_start_stuff' , tract_end_stuff = '$tract_end_stuff' , tract_leave_wh = '$tract_leave_wh' , tract_arr_in_dest = '$tract_arr_in_dest' where tract_id='$tract_id' ");
-
-  if($query){
-    header("Location: ./truck_job_list.php?rcd_id=$rcd_id&dt=$tract_start");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
-  }
-}
-
-if(isset($_POST["deliveryterm"]))    
-{    
-
-$tr_job_id    = $_POST['tr_job_id'];
-$rcd_id       = $_POST['rcd_id'];
-$dlv_date     = $_POST['dlv_date'];
-
-  $query = mysql_query("UPDATE tb_truck_assign SET dlv_date = '$dlv_date' where truck_job_id='$tr_job_id' ");
-
-  if($query){
-    header("Location: ./truck_job_list.php?rcd_id=$rcd_id");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
-  }
-}
-
-if(isset($_POST["logupdate"]))    
-{    
-
-  $CurrentTime          = $_POST['CurrentTime'];
-  $CurrentLocation      = $_POST['CurrentLocation'];
-  $Remarks              = $_POST['Remarks'];
-  $tract_id             = $_POST['tract_id'];
-  $rcd_id               = $_POST['rcd_id'];
-  $user_name            = $_POST['user_name'];
-
-  $query = mysql_query("INSERT into tb_truck_job_log values('','$tract_id','$CurrentTime','$CurrentLocation','$Remarks','$user_name')");
-
-  if($query){
-    header("Location: ./truck_job_list.php?rcd_id=$rcd_id&dt=$CurrentTime");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
-  }
-}
-
-if(isset($_POST["add_row"]))    
-{    
-
-  $tr_job_id    = $_POST['tr_job_id'];
-  $rcd_id       = $_POST['rcd_id'];
-  $conType      = $_POST['conType'];
-  $CurrentTime  = date('YmdHis');
-
-  $query = mysql_query("INSERT into tb_truck_job_details(cont_type,truck_job_id,rcd_id) values('$conType','$tr_job_id','$rcd_id')");
-
-  if($query){
-    header("Location: ./truck_job_list.php?rcd_id=$rcd_id&dt=$CurrentTime");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator".mysql_error();
-  }
-}
-
-if(isset($_POST['delete_row']))
+// FUNCTION SEARCHING
+$findVAH = '';
+$findMOTOne = '';
+$findformOne = 'show';
+if(isset($_GET['findone']))
 {
-  $job_id       = $_POST['job_id'];
-  $rcd_id       = $_POST['rcd_id'];
-
-  $query = mysql_query("DELETE FROM tb_truck_job_details WHERE tract_id = '$job_id' ");
-
-  if($query){
-    header("Location: ./truck_job_list.php?rcd_id=$rcd_id&dt=$CurrentTime");                 
-  } else {
-    echo "Operation Failed! Please contact your administrator".mysql_errno();
-  }
+  $findVAH = $_GET['findVAH'];
+  $findMOTOne = $_GET['findMOTOne'];
+  $findformOne = 'show';
 }
 
-
-if(isset($_POST["complete"]))    
-{    
-
-  $tract_id         = $_POST['tract_id'];
-  $user_name        = $_POST['user_name'];
-  $datenow          = date('Y-m-d');
-
-  $query = mysql_query("UPDATE tb_truck_job_details SET tract_order_rcvd ='$datenow' where tract_id='$tract_id'");
-  if($query){
-    header("Location: ./truck_job_list.php");                                                  
-  } else {
-    echo "Updated Failed - Please contact your administrator";
-  }
+$startdate = '';
+$enddate = '';
+$findformTwo = 'none';
+if(isset($_GET['findtwo']))
+{
+  $startdate = $_GET['startdate'];
+  $enddate = $_GET['enddate'];
+  $findformTwo = 'show';
+  $findformOne = 'none';
 }
 
+$findAssignBy = '';
+$findMOTThree = '';
+$findformThree = 'none';
+if(isset($_GET['findthree']))
+{
+  $findAssignBy = $_GET['findAssignBy'];
+  $findMOTThree = $_GET['findMOTThree'];
+  $findformThree = 'show';
+  $findformOne = 'none';
+}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
 <?php include 'include/head.php';?>
-<body>
-
-  <div id="wrapper">
-    <?php include 'include/header.php';?>
-
-    <div id="page-wrapper">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="page-header">[Truck - Import] Update Job List</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-      </div>
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="row">
-
-                <?php
-                mysql_connect('localhost', 'root','');
-                mysql_select_db('contta');
-                $getmas = mysql_query("SELECT * FROM tb_master_impor WHERE rcd_id = '$_GET[rcd_id]'");
-                $mas = mysql_fetch_array($getmas);  
-                $gettruckid = mysql_query("SELECT truck_job_id,dlv_date FROM tb_truck_assign WHERE rcd_id = '$_GET[rcd_id]' ");
-                $getTruckIdSql = mysql_fetch_array($gettruckid);                              
-                ?>
-
-                <div class="col-lg-4">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      Master Details
-                    </div>
-                    <div class="panel-body">
-                      <div class="col-lg-12">
-                        <div class="alert alert-info">
-                          KNREF : <a href="#" class="alert-link"><?php echo $mas['rcd_ref'];?></a> <br>
-                          HBL : <a href="#" class="alert-link"><?php echo $mas['rcd_hbl'];?></a> <br>
-                          AJU : <a href="#" class="alert-link"><?php echo $mas['rcd_aju'];?></a> <br>
-                          Shipper : <a href="#" class="alert-link"><?php echo $mas['rcd_shipper'];?></a> <br>
-                          Consignee : <a href="#" class="alert-link"><?php echo $mas['rcd_cnee'];?></a> <br>
-                        </div>
-                      </div>                          
-                    </div>
-                  </div>
-                  <!-- /.col-lg-4 -->
-                </div>
-
-                <div class="col-lg-4">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      Master Details
-                    </div>
-                    <div class="panel-body">
-                      <div class="col-lg-12">
-                        <div class="alert alert-info">
-                          ATA : <a href="#" class="alert-link"><?php echo $mas['rcd_ata'];?></a> <br>
-                          ETA : <a href="#" class="alert-link"><?php echo $mas['rcd_eta'];?></a> <br>
-                          CBM : <a href="#" class="alert-link"><?php echo $mas['rcd_cbm'];?></a> <br>
-                          Package : <a href="#" class="alert-link"><?php echo $mas['rcd_package'];?></a> <br>
-                        </div>
-                      </div>                          
-                    </div>
-                  </div>
-                  <!-- /.col-lg-4 -->
-                </div>
-
-                <div class="col-lg-4">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      Master Details
-                    </div>
-                    <div class="panel-body">
-                      <div class="col-lg-12">
-                        <div class="alert alert-info">
-                          Cont. 20' : <a href="#" class="alert-link"><?php echo $mas['rcd_20_type'];?></a> <br>
-                          Cont. 40' : <a href="#" class="alert-link"><?php echo $mas['rcd_40_type'];?></a> <br>
-                          ShipType : <a href="#" class="alert-link"><?php echo $mas['rcd_type'];?></a> <br>
-                          RcdCreated : <a href="#" class="alert-link"><?php echo $mas['rcd_create_date'];?></a> <br>
-                        </div>
-                      </div>                          
-                    </div>
-                  </div>
-                  <!-- /.col-lg-4 -->
-                </div>
-
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="col-md-2">
-                    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#myModal">+ADD</button>
-                  </div>
-                  <div class="col-md-6">
-                    
-                  </div>
-                  <div class="col-md-2">
-                    <button class="btn btn-block btn-success" data-toggle="modal" data-target="#deliveryterm">DELIVERY</button>
-                  </div>
-                  <div class="col-md-2">
-                    <p>DlvDate : <?php echo $getTruckIdSql['dlv_date'];;?></p>
-                  </div>
-                </div>
-                <div class="col-lg-1">
-
-                  <!-- MODAL FOR ADD NEW CONTAINER RECORD / START  -->
-                  <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title"><b>[Vehicle Type] </b> Add Container/Truck List</h4>
-                        </div>
-                        <div class="modal-body">
-                          <form method="post" action=" ">
-                            <div class="col-md-12">
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <input type="hidden" name="tr_job_id" value="<?php echo $getTruckIdSql['truck_job_id'];?>" class="form-control" required>
-                                  <input type="hidden" name="rcd_id" value="<?php echo $mas['rcd_id'];?>" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                  <label>Type</label>
-                                  <select class="form-control" name="conType">
-                                    <option value="">---SELECT---</option>
-                                    <option value="20">20</option>
-                                    <option value="40">40</option>
-                                    <option value="CDE">CDE</option>
-                                    <option value="CDD">CDD</option>
-                                    <option value="Flatbed">Flatbed</option>
-                                    <option value="Fuso">Fuso</option>
-                                    <option value="WingBox">WingBox</option>
-                                    <option value="GrandMax">GrandMax</option>
-                                  </select>                              
-                                </div>
-                                <button type="submit" name="add_row" value="add_row" class="btn btn-primary">Add</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                              </div>                          
-                            </div>                                                                            
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- MODAL FOR ADD NEW CONTAINER RECORD / END -->
-
-                  <!-- MODAL FOR ADD DELIVERY DATE PER JOB RECORD / START -->
-                  <div class="modal fade" id="deliveryterm" role="dialog">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title"><b>[Trucking] </b> Input Delivery Date</h4>
-                        </div>
-                        <div class="modal-body">
-                          <form method="post" action=" ">
-                            <div class="col-md-12">
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <input type="hidden" name="tr_job_id" value="<?php echo $getTruckIdSql['truck_job_id'];?>" class="form-control" required>
-                                  <input type="hidden" name="rcd_id" value="<?php echo $mas['rcd_id'];?>" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                 <input type="date" name="dlv_date" class="form-control" required>
-                                </div>
-                                <button type="submit" name="deliveryterm" value="deliveryterm" class="btn btn-primary">Submit</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                              </div>                          
-                            </div>                                                                            
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- MODAL FOR ADD DELIVERY DATE PER JOB RECORD / END -->
-
-                </div> 
-              </div>
-
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                  <thead>
-                    <tr>
-                      <th>Flags</th>
-                      <th>Tr.ID</th>                      
-                      <th>JobID</th>
-                      <th>RcdID</th>
-                      <th>BookingCode</th>
-                      <th>Cont/Truck Type</th>
-                      <th>DriverName</th>
-                      <th>MobilePh</th>          
-                      <th>VehicleNo</th>
-                      <th>Cont.No</th>   
-                      <th>Seal.No</th> 
-                      <th>TareCont</th>   
-                      <th>StuffArea</th>               
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $ids  = $_GET['rcd_id'];
-                    $con=mysqli_connect("localhost","root","","contta");
-                    if (mysqli_connect_errno())
-                    {
-                      echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                    }
-                    $result = mysqli_query($con,"SELECT * FROM tb_truck_job_details  where rcd_id = '$ids' ");
-                    if(mysqli_num_rows($result)>0){
-                      while($row = mysqli_fetch_array($result))
-                      {
-                        echo "<tr>";
-                        echo "<td align= ''>
-
-                        <a href='#' target='_SELF' onclick=window.open('truck_job_log_view.php?tract_id=$row[tract_id]','name','menubar=yes,toolbar=no,addressbar=no,scrollbar=no,left=250,top=100,width=500,height=300') title='view logs data'><button type='button' class='btn btn-default btn-circle'><i class='fa fa-list'></i></button></a>  
-
-                        <a href='#' data-toggle='modal' data-target='#actview$row[tract_id]' title='view activity data'><button type='button' class='btn btn-default btn-circle'><i class='fa fa-link'></i></button></a>
-
-
-                        </td>";
-                        echo "<td>" . $row['tract_id'] . "</td>";
-                        echo "<td>" . $row['truck_job_id'] . "</td>";                      
-                        echo "<td>" . $row['rcd_id'] . "</td>";
-                        echo "<td>" . $row['booking_code'] . "</td>";               
-                        echo "<td>" . $row['cont_type'] . "</td>";
-                        echo "<td>" . $row['tract_driver_name'] . "</td>";
-                        echo "<td>" . $row['tract_driver_phone'] . "</td>";
-                        echo "<td>" . $row['tract_vehicle_no'] . "</td>";    
-                        echo "<td>" . $row['tract_cont_no'] . "</td>"; 
-                        echo "<td>" . $row['seal_no'] . "</td>"; 
-                        echo "<td>" . $row['cont_tear'] . "</td>";
-                        echo "<td>" . $row['stuffarea'] . "</td>"; 
-                        echo "<td align= ''>
-                        <a href='#' data-toggle='modal' data-target='#edit$row[tract_id]' title='Edit this record'><span class='label label-primary'>Update</span></a>
-                        <a href='#' data-toggle='modal' data-target='#act$row[tract_id]' title='Edit this record'><span class='label label-primary'>Activity</span></a>
-                        <a href='#' data-toggle='modal' data-target='#log$row[tract_id]' title='update log status'><span class='label label-primary'>Logs</span></a>
-                        <a href='#' data-toggle='modal' data-target='#remove$row[tract_id]' title='update log status'><span class='label label-danger'>Remove</span></a>
-                        </td>";
-                        echo "</tr>";
-                        ?>
-
-                        <div class="modal fade" id="act<?php echo $row['tract_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[RecordMaster] </b> Update Job Activity</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form method="post" action=" ">
-                                  <div class="col-md-12">
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Start from Depo</label>
-                                        <input type="text" name="tract_start" class="form-control" value="<?php echo $row['tract_start'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Arrived in Warehouse</label>
-                                        <input type="text" name="tract_arr_in_wh" class="form-control" value="<?php echo $row['tract_arr_in_wh'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Start Stuffing</label>
-                                        <input type="text" name="tract_start_stuff" class="form-control" value="<?php echo $row['tract_start_stuff'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>End Stuffing</label>
-                                        <input type="text" name="tract_end_stuff" value="<?php echo $row['tract_end_stuff'];?>"  class="form-control" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Leave Warehouse</label>
-                                        <input type="text" name="tract_leave_wh" value="<?php echo $row['tract_leave_wh'];?>"  class="form-control" >
-                                        <input type="hidden" name="tract_id" value="<?php echo $row['tract_id'];?>"  class="form-control" >
-                                        <input type="hidden" name="rcd_id" value="<?php echo $row['rcd_id'];?>"  class="form-control" >
-                                      </div> 
-                                      <div class="form-group">
-                                        <label>Arrived in CY</label>
-                                        <input type="text" name="tract_arr_in_dest" class="form-control" value="<?php echo $row['tract_arr_in_dest'];?>" >
-                                      </div>                                 
-                                    </div>                         
-                                  </div>    
-                                  <div class="modal-footer">
-                                    <button type="submit" name="act_update" value="act_update" class="btn btn-primary">Update</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                  </div>                                                                        
-                                </form>
-                              </div>                            
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="modal fade" id="log<?php echo $row['tract_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[RecordMaster] </b> Update Job Logs</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form method="post" action=" ">
-                                  <div class="col-md-12">
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>CurrentTime</label>
-                                        <input type="text" name="CurrentTime" readonly class="form-control" value="<?php echo date('Y-m-d H:i:s');?>">
-                                      </div>
-                                      <div class="form-group">
-                                        <label>CurrentLocation</label>
-                                        <input type="text" name="CurrentLocation" class="form-control" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Remarks</label>
-                                        <input type="text" name="Remarks" class="form-control">
-                                        <input type="hidden" name="tract_id" value="<?php echo $row['tract_id'];?>"  class="form-control" >
-                                        <input type="hidden" name="rcd_id" value="<?php echo $row['rcd_id'];?>"  class="form-control" >
-                                        <input type="hidden" name="user_name" value="<?php echo $_SESSION['username'];?>"  class="form-control" >
-                                      </div>                               
-                                    </div>                         
-                                  </div>    
-                                  <div class="modal-footer">
-                                    <button type="submit" name="logupdate" value="logupdate" class="btn btn-primary">Update</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                  </div>                                                                        
-                                </form>
-                              </div>                            
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="modal fade" id="remove<?php echo $row['tract_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[RecordMaster] </b> Remove Job Logs</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form method="post" action=" ">
-                                  <div class="col-md-12">
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Tr.ID:</label>
-                                        <input type="text" name="job_id" value="<?php echo $row['tract_id'];?>" readonly class="form-control" >
-                                        <label>Rcd_ID:</label>
-                                        <input type="text" name="rcd_id" value="<?php echo $row['rcd_id'];?>" readonly class="form-control" >
-                                        <!-- <input type="hidden" name="user_name" value="<?php echo $_SESSION['username'];?>"  class="form-control" > -->
-                                      </div>                               
-                                    </div>                         
-                                  </div>    
-                                  <div class="modal-footer">
-                                    <button type="submit" name="delete_row" value="delete_row" class="btn btn-danger">Remove!</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                  </div>                                                                        
-                                </form>
-                              </div>                            
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="modal fade" id="edit<?php echo $row['tract_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[RecordMaster] </b> Update Job Details</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form method="post" action=" ">
-                                  <div class="col-md-12">
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Booking Code</label>
-                                        <input type="text" name="booking_code" class="form-control" value="<?php echo $row['booking_code'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Driver Name</label>
-                                        <input type="text" name="tract_driver_name" class="form-control" value="<?php echo $row['tract_driver_name'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Driver Phone</label>
-                                        <input type="text" name="tract_driver_phone" class="form-control" value="<?php echo $row['tract_driver_phone'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Vehicle No</label>
-                                        <input type="text" name="tract_vehicle_no" value="<?php echo $row['tract_vehicle_no'];?>"  class="form-control" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Container No.</label>
-                                        <input type="text" name="tract_cont_no" value="<?php echo $row['tract_cont_no'];?>"  class="form-control" >
-                                        <input type="hidden" name="tract_id" value="<?php echo $row['tract_id'];?>"  class="form-control" >
-                                        <input type="hidden" name="rcd_id" value="<?php echo $row['rcd_id'];?>"  class="form-control" >
-                                      </div> 
-                                      <div class="form-group">
-                                        <label>Seal No.</label>
-                                        <input type="text" name="seal_no" class="form-control" value="<?php echo $row['seal_no'];?>" >
-                                      </div> 
-                                      <div class="form-group">
-                                        <label>Container Tear</label>
-                                        <input type="text" name="cont_tear" class="form-control" value="<?php echo $row['cont_tear'];?>" >
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Stuff Area</label>
-                                        <input type="text" name="stuffarea" class="form-control">
-                                      </div>                                 
-                                    </div>                         
-                                  </div>    
-                                  <div class="modal-footer">
-                                    <button type="submit" name="update" value="update" class="btn btn-primary">Update</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                  </div>                                                                        
-                                </form>
-                              </div>                            
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="modal fade" id="confirm<?php echo $row['rcd_id'];?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>[RecordManage] </b> Complete Record</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form method="post" action=" ">
-                                  <div class="form-group">
-                                    <label>Are you sure Complete this record?</label>
-                                    <h6>RecordID : <?php echo $row['tract_id'];?></h6>
-                                    <input type="hidden" name="tract_id" class="form-control" value="<?php echo $row['tract_id'];?>">
-                                    <input type="hidden" name="user_name" class="form-control" value="<?php echo $_SESSION['username'];?>">
-                                  </div>
-                                  <button type="submit" name="complete" value="complete" class="btn btn-default">Complete</button>
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <?php
-                      }
-                    }
-                    mysqli_close($con);
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.table-responsive -->
-
-            </div>
-            <!-- /.panel-body -->
-          </div>
-          <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-12 -->
+<div id="wrapper">
+  <?php include 'include/header.php';?>
+  <div id="page-wrapper">
+    <!-- Page -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">
+          <i class="fa fa-truck-moving icon-title"></i> Trucker - Job List
+        </h1>
+        <nav aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Trucker - Job List</li>
+          </ol>
+        </nav>
       </div>
     </div>
-    <!-- /#page-wrapper -->
+    <!-- End Page -->
+    <!-- Search -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fas fa-filter"></i> Filter Data - by
+            <select type="text" id="findby" style="background: transparent;border-color: transparent;">
+              <option value="opone">REF, Vendor, AJU / HBL, Shipper & Consignee</option>
+              <option value="optwo">Date Range Confirm</option>
+              <option value="opthree">Confirm By</option>
+            </select>
+          </div>
+          <div class="panel-body">
+            <div class="page-add">
+              <form method="get" action="truck_job_confirmed.php" id="fformone" style="display: <?= $findformOne ?>;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>REF, Vendor, AJU / HBL, Shipper & Consignee </label>
+                      <?php if ($findVAH == '') { ?>
+                        <input type="text" name="findVAH" id="idfindVAH" class="form-control" placeholder="REF, Vendor, AJU / HBL, Shipper & Consignee...">
+                      <?php } else { ?>
+                        <input type="text" name="findVAH" id="idfindVAH" class="form-control" placeholder="REF, Vendor, AJU / HBL, Shipper & Consignee..." value="<?= $findVAH; ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>MOT</label>
+                      <select type="text" name="findMOTOne" id="idfindMOTOne" class="form-control">
+                        <?php if ($findMOTOne == '') { ?>
+                        <option value="">-- Select MOT --</option>
+                        <?php } else { ?>
+                        <option value="<?= $findMOTOne; ?>"><?= $findMOTOne; ?></option>
+                        <option value="">-- Select MOT --</option>
+                        <?php } ?>
+                        <option value="FCL">FCL</option>
+                        <option value="LCL">LCL</option>
+                        <option value="AIR">AIR</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="text-align: right;">
+                    <a href="truck_job_confirmed.php" type="button" class="btn btn-info"><i class="fas fa-redo"></i> Reset</a>
+                    <button type="submit" name="findone" id="idbtnfindone" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                  </div>
+                </div>
+              </form>
+              <form method="get" action="truck_job_confirmed.php" id="fformtwo" style="display: <?= $findformTwo ?>;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Start Date</label>
+                      <?php if ($startdate == '') { ?>
+                        <input type="date" name="startdate" class="form-control">
+                      <?php } else { ?>
+                        <input type="date" name="startdate" class="form-control" value="<?= $startdate ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>End Date</label>
+                      <?php if ($enddate == '') { ?>
+                        <input type="date" name="enddate" class="form-control">
+                      <?php } else { ?>
+                        <input type="date" name="enddate" class="form-control" value="<?= $enddate ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="text-align: right;">
+                    <a href="truck_job_confirmed.php" type="button" class="btn btn-info"><i class="fas fa-redo"></i> Reset</a>
+                    <button type="submit" name="findtwo" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                  </div>
+                </div>
+              </form>
+              <form method="get" action="truck_job_confirmed.php" id="fformthree" style="display: <?= $findformThree ?>;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Confirm </label>
+                      <?php if ($findAssignBy == '') { ?>
+                        <input type="text" name="findAssignBy" id="idfindAssignBy" class="form-control" placeholder="Confirm...">
+                      <?php } else { ?>
+                        <input type="text" name="findAssignBy" id="idfindAssignBy" class="form-control" placeholder="Confirm..." value="<?= $findAssignBy; ?>">
+                      <?php } ?>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>MOT</label>
+                      <select type="text" name="findMOTThree" id="idfindMOTThree" class="form-control">
+                        <?php if ($findMOTThree == '') { ?>
+                        <option value="">-- Select Type --</option>
+                        <?php } else { ?>
+                        <option value="<?= $findMOTThree; ?>"><?= $findMOTThree; ?></option>
+                        <option value="">-- Select Type --</option>
+                        <?php } ?>
+                        <option value="FCL">FCL</option>
+                        <option value="LCL">LCL</option>
+                        <option value="AIR">AIR</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="text-align: right;">
+                    <a href="truck_job_confirmed.php" type="button" class="btn btn-info"><i class="fas fa-redo"></i> Reset</a>
+                    <button type="submit" name="findthree" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Search -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-table"></i> Trucker - Job List
+          </div>
+          <div class="panel-body">
+            <?php
+            $con=mysqli_connect("localhost","root","","contta");
+            if (mysqli_connect_errno())
+            {
+              echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            }
+            $result = mysqli_query($con,"SELECT COUNT(*) AS total FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!=''");
+            $cont_c = mysqli_fetch_array($result);
+            ?>
+            <div class="p-b-20" style="margin-bottom: 15px;">
+                <div class="alert-info">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Information!</strong> Total Trucker - Job List on Localcontta: <b><?= $cont_c['total'] ?> Trucker - Job List</b>.
+                  <p style="margin-bottom: 0px;">Trucker - Job List List on tables only shows the last 50 data, search Trucker - Job List' names if you can't find them in the table.</p>
+                </div>
+            </div>
+            <style type="text/css">
+              tbody {
+                  font-size: 12px;
+              }
+              thead {
+                  background: #55b8f2;
+                  color: white;
+                  font-size: 14px;
+              }
+            </style>
+            <!-- Count FCL LCL AIR -->
+            <?php
+            $con=mysqli_connect("localhost","root","","contta");
+            if (mysqli_connect_errno())
+            {
+              echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            }
+            $result_fcl = mysqli_query($con,"SELECT COUNT(*) AS total_fcl FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' AND mot='FCL'");
+            $cont_fcl = mysqli_fetch_array($result_fcl);
+
+            $result_lcl = mysqli_query($con,"SELECT COUNT(*) AS total_lcl FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' AND mot='FCL'");
+            $cont_lcl = mysqli_fetch_array($result_lcl);
+
+            $result_air = mysqli_query($con,"SELECT COUNT(*) AS total_air FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' AND mot='AIR'");
+            $cont_air = mysqli_fetch_array($result_air);
+            ?>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body p-3">
+                    <div class="card-content">
+                      <div style="display: grid;">
+                        <font style="font-size: 25px;font-weight: 600;">FCL</font>
+                        <font style="font-size: 16px;font-weight: 600;"><?= $cont_fcl['total_fcl'] ?> Job List</font>
+                        <div class="card_divider"></div>
+                        <font style="font-size: 10px;font-weight: 300;"><?= date_indo(date('Y-m-d'), true); ?></font>
+                      </div>
+                      <div class="icon-bg-na">
+                        <i class="fas fa-ship fa-fw detail-na" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body p-3">
+                    <div class="card-content">
+                      <div style="display: grid;">
+                        <font style="font-size: 25px;font-weight: 600;">LCL</font>
+                        <font style="font-size: 16px;font-weight: 600;"><?= $cont_lcl['total_lcl'] ?> Job List</font>
+                        <div class="card_divider"></div>
+                        <font style="font-size: 10px;font-weight: 300;"><?= date_indo(date('Y-m-d'), true); ?></font>
+                      </div>
+                      <div class="icon-bg-na">
+                        <i class="fas fa-ship fa-fw detail-na" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body p-3">
+                    <div class="card-content">
+                      <div style="display: grid;">
+                        <font style="font-size: 25px;font-weight: 600;">AIR</font>
+                        <font style="font-size: 16px;font-weight: 600;"><?= $cont_air['total_air'] ?> Job List</font>
+                        <div class="card_divider"></div>
+                        <font style="font-size: 10px;font-weight: 300;"><?= date_indo(date('Y-m-d'), true); ?></font>
+                      </div>
+                      <div class="icon-bg-na">
+                        <i class="fas fa-plane-departure  detail-na" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Count FCL LCL AIR -->
+            <div class="table-responsive">
+              <table class="display hover" id="TruckConfirmed">
+                <thead>
+                  <tr>
+                    <th class="no-sort">#</th>
+                    <th class="no-sort" style="text-align: center;">Number</th>
+                    <th class="no-sort" style="text-align: center;">S & C - Vendor</th>
+                    <th class="no-sort" style="text-align: center;">Details</th>
+                    <th class="no-sort" style="text-align: center;">Confirm</th>
+                    <th style="text-align: center;">Action</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $con=mysqli_connect("localhost","root","","contta");
+                  if (mysqli_connect_errno())
+                  {
+                    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                  }
+                  // $result = mysqli_query($con,"SELECT * FROM tb_cnee ORDER BY regdate DESC LIMIT 50");
+                  if(isset($_GET['findone']))
+                  {
+                    $findVAH = $_GET['findVAH'];
+                    $findMOTOne = $_GET['findMOTOne'];
+                    // $result = mysqli_query($con,"SELECT * FROM tb_truck_assign WHERE order_rcvd_by='' AND assign_vendor LIKE '%$findVAH%' AND assign_by!=''");       
+                    $result = mysqli_query($con,"SELECT * FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' AND tb_master_impor.rcd_ref LIKE '%$findVAH%' OR tb_truck_assign.assign_vendor LIKE '%$findVAH%' OR tb_master_impor.rcd_aju LIKE '%$findVAH%' OR tb_master_impor.rcd_hbl LIKE '%$findVAH%' OR tb_master_impor.rcd_shipper LIKE '%$findVAH%' OR tb_master_impor.rcd_cnee LIKE '%$findVAH%' AND tb_master_impor.rcd_mot LIKE '%$findMOTOne%'");       
+                  } else if(isset($_GET['findtwo'])) {
+                    $startdate = $_GET['startdate'];
+                    $enddate = $_GET['enddate'];
+                    // $result = mysqli_query($con,"SELECT * FROM tb_truck_assign WHERE order_rcvd_by='' AND assign_by!='' AND assign_date BETWEEN '$startdate' AND '$enddate'");  
+                    $result = mysqli_query($con,"SELECT * FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' AND tb_truck_assign.order_rcvd_date BETWEEN '$startdate' AND '$enddate'");  
+                  } else if(isset($_GET['findthree'])) {
+                    $findAssignBy = $_GET['findAssignBy'];
+                    $findMOTThree = $_GET['findMOTThree'];
+                    // $result = mysqli_query($con,"SELECT * FROM tb_truck_assign WHERE order_rcvd_by='' AND assign_by LIKE '%$findAssignBy%' AND mot LIKE '%$findMOTThree%'");
+                    $result = mysqli_query($con,"SELECT * FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' AND tb_truck_assign.order_rcvd_by LIKE '%$findAssignBy%' AND tb_master_impor.rcd_mot LIKE '%$findMOTThree%'");  
+                  } else {
+                    $result = mysqli_query($con,"SELECT * FROM tb_truck_assign INNER JOIN tb_master_impor ON tb_truck_assign.rcd_id=tb_master_impor.rcd_id WHERE tb_truck_assign.order_rcvd_by!='' ORDER BY tb_truck_assign.rcd_id DESC LIMIT 50");   
+                  }
+                  if(mysqli_num_rows($result)>0){
+                    $no=0;
+                    while($row = mysqli_fetch_array($result))
+                    {
+                      $no++;
+                      echo "<tr>";
+                      echo "<td>" . $no . ".</td>";
+                      echo "<td>
+                           <font><b>RCD ID: </b>" . $row['rcd_id'] . "</font>
+                           <br>
+                           <font><b>REF: </b>" . $row['rcd_ref'] . "</font>
+                           <br>
+                           <font><b>AJU: </b>" . $row['rcd_aju'] . "</font>
+                           <br>
+                           <font><b>HBL: </b>" . $row['rcd_hbl'] . "</font>
+                           </td>";
+                      echo "<td>
+                           <font><b>Vendor: </b>" . $row['assign_vendor'] . "</font>
+                            <hr>
+                           <font><b>Shipper: </b>" . $row['rcd_shipper'] . "</font>
+                           <br>
+                           <font><b>Consignee: </b>" . $row['rcd_cnee'] . "</font>
+                           </td>";
+                      echo "<td>
+                           <font><b>ETD: </b>" . $row['rcd_eta'] . "</font>
+                           <font><b>ATA: </b>" . $row['rcd_ata'] . "</font>
+                            <hr>
+                           <font><b>MOT: </b>" . $row['rcd_mot'] . "</font>
+                           <br>
+                           <font><b>Party: </b>" . $row['rcd_party'] . "</font>
+                           <br>
+                           <font><b>CBM: </b>" . $row['rcd_cbm'] . "</font>
+                           <br>
+                           <font><b>Package: </b>" . $row['rcd_package'] . "</font>
+                           <br>
+                           <font><b>Weight: </b>" . $row['rcd_weight'] . "</font>
+                           </td>";
+                      echo "<td>
+                           <font><b>Date: </b>" . $row['order_rcvd_date'] . "</font>
+                           <br>
+                           <font><b>By: </b>" . $row['order_rcvd_by'] . "</font>
+                           </td>";
+                      echo "<td style='text-align: center'>
+                        <a href='#' data-toggle='modal' data-target='#update$row[rcd_id]' title='Update Record'><span class='btn btn-sm btn-warning'><i class='fas fa-pencil'></i></span></a>
+                        </td>";
+                      echo "</tr>";
+                      ?>
+                      <!-- Update -->
+                      <!-- End Update -->
+                    <?php }
+                    } else {
+                      echo "<tr>";
+                      echo "<td colspan='6' align='center'><b><i>" . "No Available Record" . "</i></b></td>";
+                      echo "</tr>";
+                    }  mysqli_close($con); 
+                    ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /#wrapper -->
+</div>
+<?php 
+include 'include/jquery.php';
+?>
+<!-- Consignee -->
+<script type="text/javascript">
+    // Input - Add
+    if (window?.location?.href?.indexOf('CaddSuccess') > -1) {
+        Swal.fire({
+            title: 'Success Alert!',
+            icon: 'success',
+            text: 'Data saved successfully!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
 
-  <?php include 'include/jquery.php';?>
+    if (window?.location?.href?.indexOf('CaddFailed') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Data failed to save, please contact your administrator!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
 
-</body>
+    if (window?.location?.href?.indexOf('CaddReady') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Consignee Name already registered, please contact your administrator!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
+    // End Input - Add
 
-</html>
+    // Update Data
+    if (window?.location?.href?.indexOf('CUpdateSuccessCC') > -1) {
+        Swal.fire({
+            title: 'Success Alert!',
+            icon: 'success',
+            text: 'Data updated successfully!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
+
+    if (window?.location?.href?.indexOf('CUpdateFailed') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Data failed to updated, please contact your administrator!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
+
+    if (window?.location?.href?.indexOf('CUpdateReady') > -1) {
+        Swal.fire({
+            title: 'Failed Alert!',
+            icon: 'error',
+            text: 'Consignee Name already registered, please contact your administrator!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
+    // End Update Data
+
+    // Delete
+    if (window?.location?.href?.indexOf('DeleteSuccess') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data delete successfully!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
+
+    if (window?.location?.href?.indexOf('DeleteFailed') > -1) {
+        Swal.fire({
+            title: 'Delete Alert!',
+            icon: 'info',
+            text: 'Data failed to delete, please contact your administrator!',
+        })
+        history.replaceState({}, '', './truck_job_confirmed.php');
+    }
+    // End Delete
+</script>
+<!-- Search -->
+<script type="text/javascript">
+  $(function() {
+    $("#findby").change(function() {
+      if ($(this).val() == "opone") {
+        $("#fformone").show();
+        $("#fformtwo").hide();
+        $("#fformthree").hide();
+      } else if ($(this).val() == "optwo") {
+        $("#fformtwo").show();
+        $("#fformone").hide();
+        $("#fformthree").hide();
+      } else if ($(this).val() == "opthree") {
+        $("#fformthree").show();
+        $("#fformone").hide();
+        $("#fformtwo").hide();
+      } else {
+        $("#fformone").hide();
+        $("#fformtwo").hide();
+        $("#fformthree").hide();
+      }
+    });
+  });
+</script>
+<!-- End Search -->

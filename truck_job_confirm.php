@@ -87,12 +87,12 @@ if(isset($_GET['findthree']))
     <div class="row">
       <div class="col-lg-12">
         <h1 class="page-header">
-          <i class="fa fa-truck-moving icon-title"></i> Trucker - Confirm Job
+          <i class="fa fa-truck-moving icon-title"></i> Trucker - Job Confirm
         </h1>
         <nav aria-label="breadcrumb" role="navigation">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Trucker - Confirm Job</li>
+            <li class="breadcrumb-item active" aria-current="page">Trucker - Job Confirm</li>
           </ol>
         </nav>
       </div>
@@ -218,7 +218,7 @@ if(isset($_GET['findthree']))
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <i class="fa fa-table"></i> Trucker - Confirm Job List
+            <i class="fa fa-table"></i> Trucker - Job Confirm List
           </div>
           <div class="panel-body">
             <?php
@@ -233,8 +233,8 @@ if(isset($_GET['findthree']))
             <div class="p-b-20" style="margin-bottom: 15px;">
                 <div class="alert-info">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                  <strong>Information!</strong> Total Trucker - Confirm Job List on Localcontta: <b><?= $cont_c['total'] ?> Trucker - Confirm Job List</b>.
-                  <p style="margin-bottom: 0px;">Trucker - Confirm Job List List on tables only shows the last 50 data, search Trucker - Confirm Job List' names if you can't find them in the table.</p>
+                  <strong>Information!</strong> Total Trucker - Job Confirm List on Localcontta: <b><?= $cont_c['total'] ?> Trucker - Job Confirm List</b>.
+                  <p style="margin-bottom: 0px;">Trucker - Job Confirm List List on tables only shows the last 50 data, search Trucker - Job Confirm List' names if you can't find them in the table.</p>
                 </div>
             </div>
             <!-- Count FCL LCL AIR -->
@@ -411,7 +411,7 @@ if(isset($_GET['findthree']))
                           <div class="modal-content">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title"><b>[Address]</b> Trucker - Confirm Job List</h4>
+                              <h4 class="modal-title"><b>[Address]</b> Trucker - Job Confirm List</h4>
                             </div>
                             <div class="modal-body">
                               <div class="row">
@@ -436,7 +436,7 @@ if(isset($_GET['findthree']))
                           <div class="modal-content">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title"><b>[Confirm]</b> Trucker - Confirm Job List</h4>
+                              <h4 class="modal-title"><b>[Confirm]</b> Trucker - Job Confirm List</h4>
                             </div>
                             <form method="post" action=" ">
                               <div class="modal-body">
@@ -483,7 +483,7 @@ if(isset($_GET['findthree']))
                           <div class="modal-content">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title"><b>[Reject]</b> Trucker - Confirm Job List</h4>
+                              <h4 class="modal-title"><b>[Reject]</b> Trucker - Job Confirm List</h4>
                             </div>
                             <form method="post" action=" ">
                               <div class="modal-body">
